@@ -596,28 +596,88 @@ function applyPAC(name,on){
 }
 
 /* ---------------- ThingSpeak ---------------- */
+/* =========================================================
+   THINGSPEAK LIVE MONITOR
+   ========================================================= */
+
 function parseState(v){
-  if(v===null||v===undefined||String(v).trim()==="")return null;
+
+  if(v===null || v===undefined) return null;
+
   const s=String(v).trim().toUpperCase();
-  if(["1","ON","TRUE","YES","RUN","RUNNING","CLOSED","CLOSE","HEALTHY"].includes(s))return true;
-  if(["0","OFF","FALSE","NO","STOP","STOPPED","OPEN","FAULT","UNHEALTHY"].includes(s))return false;
+
+  if(s==="") return null;
+
+  if([
+    "1",
+    "ON",
+    "TRUE",
+    "YES",
+    "RUN",
+    "RUNNING",
+    "CLOSED",
+    "CLOSE",
+    "HEALTHY"
+  ].includes(s)){
+    return true;
+  }
+
+  if([
+    "0",
+    "OFF",
+    "FALSE",
+    "NO",
+    "STOP",
+    "STOPPED",
+    "OPEN",
+    "FAULT",
+    "UNHEALTHY"
+  ].includes(s)){
+    return false;
+  }
+
   const n=parseFloat(s);
-  if(Number.isFinite(n))return n!==0;
+
+  if(Number.isFinite(n)){
+    return n !== 0;
+  }
+
   return null;
 }
+
+
+/* =========================================================
+   EQUIPMENT UPDATE
+   ========================================================= */
+
 function applyEquipment(name,on){
-  if(!name)return;
-  if(name.startsWith("PAC ")){status[name]=on;applyPAC(name,on);return;}
-  if(Object.prototype.hasOwnProperty.call(status,name))status[name]=on;
+
+  if(!name) return;
+
+  if(name.startsWith("PAC ")){
+
+    status[name]=on;
+    applyPAC(name,on);
+
+    return;
+  }
+
+  if(Object.prototype.hasOwnProperty.call(status,name)){
+
+    status[name]=on;
+
+  }
 }
 
-/*
-  IMPORTANT: ThingSpeak accepts public read access without a key.
-  Private channels require the channel READ API KEY. All six configured channels are listed below.
-*/
+
+/* =========================================================
+   THINGSPEAK CHANNEL MAP
+   ========================================================= */
+
 const TS_MAP={
-  /* Channel 1 — HT / EB / DG breakers */
+
   "3445201":{
+
     field1:"IC-OG PANEL",
     field2:"I/C VCB",
     field3:"O/G VCB 1",
@@ -626,10 +686,11 @@ const TS_MAP={
     field6:"DG1 ACB 1600A",
     field7:"DG2 ACB 1600A",
     field8:"2000 KVA TRANSFORMER"
+
   },
 
-  /* Channel 2 — MLTP / MPDB + PAC 2/3 */
   "3445204":{
+
     field1:"MLTP BUS COUPLER ACB 3200A",
     field2:"MLTP OUTGOING 1 ACB 2000A",
     field3:"MLTP OUTGOING 2 ACB 2000A",
@@ -637,18 +698,20 @@ const TS_MAP={
     field5:"MPDB INCOMER 2 ACB 2500A",
     field6:"PAC 2",
     field7:"PAC 3"
+
   },
 
-  /* Channel 3 — PAC 4/5/7/8 */
   "3469070":{
+
     field1:"PAC 4",
     field2:"PAC 5",
     field3:"PAC 7",
     field4:"PAC 8"
+
   },
 
-  /* Channel 4 — PAC 1/6/9/10/11/12/13/14 */
   "3432369":{
+
     field1:"PAC 1",
     field2:"PAC 6",
     field3:"PAC 9",
@@ -657,10 +720,11 @@ const TS_MAP={
     field6:"PAC 12",
     field7:"PAC 13",
     field8:"PAC 14"
+
   },
 
-  /* Channel 5 — PAC 15/16/17/18 + SMPS 1/2/3/4 */
   "3408523":{
+
     field1:"PAC 15",
     field2:"PAC 16",
     field3:"PAC 17",
@@ -669,100 +733,345 @@ const TS_MAP={
     field6:"SMPS 2",
     field7:"SMPS 3",
     field8:"SMPS 4"
+
   },
 
-  /* Channel 6 — 250 KVA UPS 1/2 + 20 KVA UPS 1/2 + VMR */
   "3469133":{
+
     field1:"250 KVA UPS 1",
     field2:"250 KVA UPS 2",
     field3:"20 KVA UPS 1",
     field4:"20 KVA UPS 2"
+
   }
+
 };
+
+
+/* =========================================================
+   CHANNEL LIST
+   ========================================================= */
 
 const THINGSPEAK={
+
   refreshMs:15000,
+
   channels:[
-    {id:"3445201",key:"",map:TS_MAP["3445201"]},
-    {id:"3445204",key:"",map:TS_MAP["3445204"]},
-    {id:"3469070",key:"",map:TS_MAP["3469070"]},
-    {id:"3432369",key:"",map:TS_MAP["3432369"]},
-    {id:"3408523",key:"",map:TS_MAP["3408523"]},
-    {id:"3469133",key:"",map:TS_MAP["3469133"]}
+
+    {
+      id:"3445201",
+      key:"",
+      map:TS_MAP["3445201"]
+    },
+
+    {
+      id:"3445204",
+      key:"",
+      map:TS_MAP["3445204"]
+    },
+
+    {
+      id:"3469070",
+      key:"",
+      map:TS_MAP["3469070"]
+    },
+
+    {
+      id:"3432369",
+      key:"",
+      map:TS_MAP["3432369"]
+    },
+
+    {
+      id:"3408523",
+      key:"",
+      map:TS_MAP["3408523"]
+    },
+
+    {
+      id:"3469133",
+      key:"",
+      map:TS_MAP["3469133"]
+    }
+
   ]
+
 };
 
+
+/* =========================================================
+   FETCH JSON
+   ========================================================= */
+
 async function fetchJSON(url){
+
   const controller=new AbortController();
-  const timer=setTimeout(()=>controller.abort(),8000);
+
+  const timeout=setTimeout(
+    ()=>controller.abort(),
+    10000
+  );
+
   try{
-    const response=await fetch(url,{method:"GET",cache:"no-store",signal:controller.signal});
-    if(!response.ok)throw new Error("HTTP "+response.status);
+
+    const response=await fetch(
+      url,
+      {
+        method:"GET",
+        cache:"no-store",
+        signal:controller.signal
+      }
+    );
+
+    if(!response.ok){
+
+      throw new Error(
+        "HTTP "+response.status
+      );
+
+    }
+
     return await response.json();
-  }finally{clearTimeout(timer);}
+
+  }finally{
+
+    clearTimeout(timeout);
+
+  }
+
 }
+
+
+/* =========================================================
+   READ ONE CHANNEL
+   ========================================================= */
 
 async function readChannel(ch){
-  if(!ch.id || ch.id.includes("CHANNEL_"))return {configured:false};
-  let url=`https://api.thingspeak.com/channels/${encodeURIComponent(ch.id)}/feeds/last.json?_=${Date.now()}`;
-  if(ch.key)url+=`&api_key=${encodeURIComponent(ch.key)}`;
+
+  let url =
+    "https://api.thingspeak.com/channels/" +
+    encodeURIComponent(ch.id) +
+    "/feeds/last.json";
+
+  if(ch.key){
+
+    url +=
+      "?api_key=" +
+      encodeURIComponent(ch.key);
+
+  }
+
+  console.log(
+    "ThingSpeak Request:",
+    url
+  );
+
+
   const data=await fetchJSON(url);
+
+
+  console.log(
+    "ThingSpeak Data:",
+    ch.id,
+    data
+  );
+
+
   let changed=0;
-  Object.entries(ch.map||{}).forEach(([field,equipment])=>{
-    const value=data[field];
-    const on=parseState(value);
-    if(on!==null){applyEquipment(equipment,on);changed++;}
-  });
-  return {configured:true,changed,data};
+
+
+  Object.entries(ch.map).forEach(
+    ([field,equipment])=>{
+
+      const value=data[field];
+
+      const on=parseState(value);
+
+
+      console.log(
+        ch.id,
+        field,
+        equipment,
+        value,
+        on
+      );
+
+
+      if(on!==null){
+
+        applyEquipment(
+          equipment,
+          on
+        );
+
+        changed++;
+
+      }
+
+    }
+  );
+
+
+  return {
+
+    configured:true,
+    changed:changed,
+    data:data
+
+  };
+
 }
 
-async function updateThingSpeak(){
-  const configured=THINGSPEAK.channels.filter(c=>c.id && !c.id.includes("CHANNEL_"));
-  if(!configured.length){
-    setTSStatus("OFFLINE","NO CHANNEL ID");
-    return;
-  }
-  const results=await Promise.allSettled(configured.map(readChannel));
-  const ok=results.filter(r=>r.status==="fulfilled" && r.value.configured).length;
-  const changed=results.reduce((n,r)=>n+(r.status==="fulfilled"?(r.value.changed||0):0),0);
-  if(ok===configured.length && changed>0)setTSStatus("LIVE",`ONLINE • ${changed} VALUES`);
-  else if(ok>0)setTSStatus("PARTIAL",`THINGSPEAK CONNECTED • ${changed} VALUES`);
-  else setTSStatus("OFFLINE","THINGSPEAK OFFLINE");
-  update();
-}
+
+/* =========================================================
+   THINGSPEAK STATUS
+   ========================================================= */
+
 function setTSStatus(mode,text){
 
-  const el=document.getElementById("tsStatus");
-  const panel=document.getElementById("panelStatusText");
+  const el=document.getElementById(
+    "tsStatus"
+  );
+
+  if(!el) return;
+
 
   if(mode==="LIVE"){
 
     el.className="online tsLive";
-    el.innerHTML="<i></i>ONLINE";
 
-    panel.textContent="PANEL ONLINE";
-    panel.style.fill="#00a85a";
+    el.innerHTML=
+      "<i></i>THINGSPEAK LIVE";
 
-  }else{
+  }
+
+  else if(mode==="PARTIAL"){
 
     el.className="online tsFail";
-    el.innerHTML="<i></i>I-OFLINE";
 
-    panel.textContent="PANEL OFFLINE";
-    panel.style.fill="#d22c3b";
+    el.innerHTML=
+      "<i></i>THINGSPEAK PARTIAL";
+
   }
+
+  else{
+
+    el.className="online tsFail";
+
+    el.innerHTML=
+      "<i></i>THINGSPEAK OFFLINE";
+
+  }
+
+
+  console.log(
+    "ThingSpeak:",
+    mode,
+    text
+  );
+
 }
 
-/* Initial display */
+
+/* =========================================================
+   UPDATE ALL CHANNELS
+   ========================================================= */
+
+async function updateThingSpeak(){
+
+  console.log(
+    "========== THINGSPEAK UPDATE =========="
+  );
+
+
+  const channels=
+    THINGSPEAK.channels;
+
+
+  const results=
+    await Promise.allSettled(
+      channels.map(
+        readChannel
+      )
+    );
+
+
+  let ok=0;
+  let changed=0;
+
+
+  results.forEach(
+    (result,index)=>{
+
+      if(result.status==="fulfilled"){
+
+        ok++;
+
+        changed +=
+          result.value.changed || 0;
+
+      }
+
+      else{
+
+        console.error(
+          "ThingSpeak Channel Error:",
+          channels[index].id,
+          result.reason
+        );
+
+      }
+
+    }
+  );
+
+
+  if(ok===channels.length){
+
+    setTSStatus(
+      "LIVE",
+      changed+" VALUES"
+    );
+
+  }
+
+  else if(ok>0){
+
+    setTSStatus(
+      "PARTIAL",
+      ok+"/"+channels.length+
+      " CHANNELS"
+    );
+
+  }
+
+  else{
+
+    setTSStatus(
+      "OFFLINE",
+      "NO CHANNEL RESPONSE"
+    );
+
+  }
+
+
+  update();
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
 update();
-updateThingSpeak();
-setInterval(updateThingSpeak,THINGSPEAK.refreshMs);
 
-function clock(){
-  document.getElementById("clock").textContent=new Date().toLocaleString("en-IN");
-}
-setInterval(clock,1000);
-clock();
+updateThingSpeak();
+
+setInterval(
+  updateThingSpeak,
+  THINGSPEAK.refreshMs
+);
 /* =====================================================
    PASSWORD LOGIN
    Password: Rjil@0003
