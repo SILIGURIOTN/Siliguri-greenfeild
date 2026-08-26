@@ -57,6 +57,73 @@ text{font-family:Arial,Helvetica,sans-serif}
 </style>
 </head>
 <body>
+  <!-- ================= LOGIN PAGE ================= -->
+<div id="loginPage" style="
+position:fixed;
+inset:0;
+z-index:99999;
+background:#071018;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial,Helvetica,sans-serif;">
+
+  <div style="
+  width:360px;
+  max-width:90%;
+  background:#0b1b29;
+  border:1px solid #2b475a;
+  border-radius:12px;
+  padding:30px;
+  box-shadow:0 0 30px rgba(0,234,255,.15);
+  text-align:center;">
+
+    <div style="font-size:24px;font-weight:bold;color:#fff;margin-bottom:8px;">
+      GREEN FIELD SILIGURI
+    </div>
+
+    <div style="font-size:13px;color:#8edfff;margin-bottom:25px;">
+      I-WB-SLGR-AG2-0003
+    </div>
+
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Enter Password"
+      autocomplete="off"
+      style="
+      width:100%;
+      padding:13px;
+      border-radius:6px;
+      border:1px solid #506a7a;
+      background:#071018;
+      color:#fff;
+      font-size:15px;
+      outline:none;">
+
+    <button onclick="doLogin()" style="
+      width:100%;
+      margin-top:15px;
+      padding:13px;
+      border:0;
+      border-radius:6px;
+      background:#08aee7;
+      color:#fff;
+      font-size:15px;
+      font-weight:bold;
+      cursor:pointer;">
+      LOGIN
+    </button>
+
+    <div id="loginError" style="
+      margin-top:12px;
+      color:#ff2638;
+      font-size:12px;
+      min-height:16px;">
+    </div>
+
+  </div>
+</div>
 
 <div class="header">
   <h1>SLD - GREEN FIELD SILIGURI</h1>
@@ -71,7 +138,7 @@ text{font-family:Arial,Helvetica,sans-serif}
 <svg viewBox="0 0 1900 1080">
 
 <text x="850" y="38" text-anchor="middle" class="title">SINGLE LINE DIAGRAM — GREEN FIELD SILIGURI</text>
-<text x="850" y="65" text-anchor="middle" class="sec">LIVE ELECTRICAL MONITORING • THINGSPEAK</text>
+<text x="850" y="65" text-anchor="middle" class="sec">I-WB-SLGR-AG2-0003</text>
 
 <!-- ===================== INCOMING ===================== -->
 <text x="850" y="92" text-anchor="middle" class="sec">33/11 kV INCOMING &amp; HT DISTRIBUTION</text>
@@ -116,7 +183,6 @@ text{font-family:Arial,Helvetica,sans-serif}
 <g><circle cx="520" cy="510" r="34" fill="#fff" stroke="#263e4c" stroke-width="2"/>
 <path d="M492 493 Q520 510 492 527 M548 493 Q520 510 548 527" fill="none" stroke="#263e4c" stroke-width="3"/>
 <text x="570" y="505" class="lbl">2000 KVA</text><text x="570" y="522" class="sm">TRANSFORMER</text>
-<circle id="led_tx" class="led on" cx="548" cy="485" r="7"/></g>
 <path class="wire" d="M520 544 V680"/>
 <path id="flowTX2" class="flow" d="M520 544 V680"/>
 
@@ -293,7 +359,6 @@ const status = {
 const leds={
  "IC-OG PANEL":"led_icog","I/C VCB":"led_ic",
  "O/G VCB 1":"led_og1","O/G VCB 2":"led_og2","O/G VCB 3":"led_og3",
- "2000 KVA TRANSFORMER":"led_tx",
  "DG1 ISOLATOR":"led_iso1","DG2 ISOLATOR":"led_iso2",
  "DG1 NEUTRAL CONTACTOR":"led_nc1","DG2 NEUTRAL CONTACTOR":"led_nc2",
  "DG1 ACB 1600A":"led_dg1","DG2 ACB 1600A":"led_dg2",
@@ -327,36 +392,173 @@ function flow(id,on){
   if(e)e.classList.toggle("off",!on);
 }
 function update(){
-  Object.keys(leds).forEach(n=>setLed(n,!!status[n]));
-  Object.keys(breakers).forEach(n=>setBreaker(n,!!status[n]));
-  document.getElementById("txt_nc1").textContent=status["DG1 NEUTRAL CONTACTOR"]?"● ON":"● OFF";
-  document.getElementById("txt_nc2").textContent=status["DG2 NEUTRAL CONTACTOR"]?"● ON":"● OFF";
-  document.getElementById("txt_20u1").textContent=status["20 KVA UPS 1"]?"ONLINE":"OFF";
-  document.getElementById("txt_20u2").textContent=status["20 KVA UPS 2"]?"ONLINE":"OFF";
 
-  const incoming=status["I/C VCB"] && status["IC-OG PANEL"];
-  const og1=incoming && status["O/G VCB 1"];
-  const og2=incoming && status["O/G VCB 2"];
-  const og3=incoming && status["O/G VCB 3"];
-  const tx=og1 && status["2000 KVA TRANSFORMER"];
-  const dg1=status["DG1 ISOLATOR"] && status["DG1 NEUTRAL CONTACTOR"] && status["DG1 ACB 1600A"];
-  const dg2=status["DG2 ISOLATOR"] && status["DG2 NEUTRAL CONTACTOR"] && status["DG2 ACB 1600A"];
-  const main=tx||dg1||dg2;
-  const out1=main&&status["MLTP OUTGOING 1 ACB 2000A"];
-  const out2=main&&status["MLTP OUTGOING 2 ACB 2000A"];
-  const mpdb=out1||out2;
+  Object.keys(leds).forEach(
+    n=>setLed(n,!!status[n])
+  );
 
-  flow("flowIncoming",incoming);flow("flowIC",incoming);
-  flow("flowOG1",og1);flow("flowOG2",og2);flow("flowOG3",og3);
-  flow("flowTX",tx);flow("flowTX2",tx);flow("flowTXBus",tx);
-  flow("flowDG1",dg1);flow("flowDG1Bus",dg1);
-  flow("flowDG2",dg2);flow("flowDG2Bus",dg2);
+  Object.keys(breakers).forEach(
+    n=>setBreaker(n,!!status[n])
+  );
+
+  document.getElementById("txt_nc1").textContent =
+    status["DG1 NEUTRAL CONTACTOR"]
+    ? "● ON"
+    : "● OFF";
+
+  document.getElementById("txt_nc2").textContent =
+    status["DG2 NEUTRAL CONTACTOR"]
+    ? "● ON"
+    : "● OFF";
+
+  document.getElementById("txt_20u1").textContent =
+    status["20 KVA UPS 1"]
+    ? "ONLINE"
+    : "OFF";
+
+  document.getElementById("txt_20u2").textContent =
+    status["20 KVA UPS 2"]
+    ? "ONLINE"
+    : "OFF";
+
+
+  /* ================= INCOMING ================= */
+
+  const incoming =
+    status["IC-OG PANEL"] &&
+    status["I/C VCB"];
+
+  const og1 =
+    incoming &&
+    status["O/G VCB 1"];
+
+  /*
+    O/G VCB 2 and O/G VCB 3 are allowed OFF.
+    They do not block the main incoming power flow.
+  */
+  const og2 = incoming;
+  const og3 = incoming;
+
+
+  /* ================= TRANSFORMER ================= */
+
+  const tx =
+    og1 &&
+    status["2000 KVA TRANSFORMER"];
+
+
+  /* ================= DG ================= */
+
+  const dg1 =
+    status["DG1 ISOLATOR"] &&
+    status["DG1 NEUTRAL CONTACTOR"] &&
+    status["DG1 ACB 1600A"];
+
+  const dg2 =
+    status["DG2 ISOLATOR"] &&
+    status["DG2 NEUTRAL CONTACTOR"] &&
+    status["DG2 ACB 1600A"];
+
+
+  /* ================= MAIN BUS ================= */
+
+  const main =
+    tx ||
+    dg1 ||
+    dg2;
+
+
+  /* ================= MLTP OUTGOING ================= */
+
+  const out1 =
+    main &&
+    status["MLTP OUTGOING 1 ACB 2000A"];
+
+  const out2 =
+    main &&
+    status["MLTP OUTGOING 2 ACB 2000A"];
+
+
+  /* ================= MPDB ================= */
+
+  const mpdb =
+    out1 ||
+    out2;
+
+
+  /* ================= FLOW ================= */
+
+  flow("flowIncoming",incoming);
+  flow("flowIC",incoming);
+
+  flow("flowOG1",og1);
+  flow("flowOG2",og2);
+  flow("flowOG3",og3);
+
+  flow("flowTX",tx);
+  flow("flowTX2",tx);
+  flow("flowTXBus",tx);
+
+  flow("flowDG1",dg1);
+  flow("flowDG1Bus",dg1);
+
+  flow("flowDG2",dg2);
+  flow("flowDG2Bus",dg2);
+
   flow("flowMain",main);
-  flow("flowOut1",out1);flow("flowOut2",out2);
-  flow("flowMPDB",mpdb);flow("flowMPDB1",out1);flow("flowMPDB2",out2);
-  flow("flowUPS2501",!!status["250 KVA UPS 1"]&&main);
-  flow("flowUPS2502",!!status["250 KVA UPS 2"]&&main);
-  ["flow20U1","flowSM1","flowSM2","flowSM3","flowSM4","flow20U2"].forEach(id=>flow(id,mpdb));
+
+  flow("flowOut1",out1);
+  flow("flowOut2",out2);
+
+  flow("flowMPDB",mpdb);
+  flow("flowMPDB1",out1);
+  flow("flowMPDB2",out2);
+
+
+  /* ================= 250 KVA UPS ================= */
+
+  flow(
+    "flowUPS2501",
+    status["250 KVA UPS 1"] && main
+  );
+
+  flow(
+    "flowUPS2502",
+    status["250 KVA UPS 2"] && main
+  );
+
+
+  /* ================= 20 KVA UPS / SMPS ================= */
+
+  flow(
+    "flow20U1",
+    status["20 KVA UPS 1"] && mpdb
+  );
+
+  flow(
+    "flowSM1",
+    status["SMPS 1"] && mpdb
+  );
+
+  flow(
+    "flowSM2",
+    status["SMPS 2"] && mpdb
+  );
+
+  flow(
+    "flowSM3",
+    status["SMPS 3"] && mpdb
+  );
+
+  flow(
+    "flowSM4",
+    status["SMPS 4"] && mpdb
+  );
+
+  flow(
+    "flow20U2",
+    status["20 KVA UPS 2"] && mpdb
+  );
 }
 
 /* ---------------- PAC 1-18 ---------------- */
@@ -523,15 +725,32 @@ async function updateThingSpeak(){
   const results=await Promise.allSettled(configured.map(readChannel));
   const ok=results.filter(r=>r.status==="fulfilled" && r.value.configured).length;
   const changed=results.reduce((n,r)=>n+(r.status==="fulfilled"?(r.value.changed||0):0),0);
-  if(ok===configured.length && changed>0)setTSStatus("LIVE",`THINGSPEAK LIVE • ${changed} VALUES`);
+  if(ok===configured.length && changed>0)setTSStatus("LIVE",`ONLINE • ${changed} VALUES`);
   else if(ok>0)setTSStatus("PARTIAL",`THINGSPEAK CONNECTED • ${changed} VALUES`);
   else setTSStatus("OFFLINE","THINGSPEAK OFFLINE");
   update();
 }
 function setTSStatus(mode,text){
+
   const el=document.getElementById("tsStatus");
-  el.className="online "+(mode==="LIVE"?"tsLive":"tsFail");
-  el.innerHTML=`<i></i>${text}`;
+  const panel=document.getElementById("panelStatusText");
+
+  if(mode==="LIVE"){
+
+    el.className="online tsLive";
+    el.innerHTML="<i></i>ONLINE";
+
+    panel.textContent="PANEL ONLINE";
+    panel.style.fill="#00a85a";
+
+  }else{
+
+    el.className="online tsFail";
+    el.innerHTML="<i></i>I-OFLINE";
+
+    panel.textContent="PANEL OFFLINE";
+    panel.style.fill="#d22c3b";
+  }
 }
 
 /* Initial display */
@@ -544,6 +763,42 @@ function clock(){
 }
 setInterval(clock,1000);
 clock();
+/* =====================================================
+   PASSWORD LOGIN
+   Password: Rjil@0003
+   ===================================================== */
+
+  
+const LOGIN_PASSWORD = "Rjil@0003";
+
+function doLogin(){
+
+  const input = document.getElementById("loginPassword").value;
+  const error = document.getElementById("loginError");
+
+  if(input === LOGIN_PASSWORD){
+
+    sessionStorage.setItem("GF_SILIGURI_LOGIN","YES");
+
+    document.getElementById("loginPage").style.display="none";
+
+    error.textContent="";
+
+  }else{
+
+    error.textContent="Incorrect password";
+
+    document.getElementById("loginPassword").value="";
+
+  }
+}
+
+
+/* Check login status */
+
+if(sessionStorage.getItem("GF_SILIGURI_LOGIN")==="YES"){
+  document.getElementById("loginPage").style.display="none";
+}
 </script>
 </body>
 </html>
