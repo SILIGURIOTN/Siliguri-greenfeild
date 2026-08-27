@@ -1,333 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>GREEN FIELD SILIGURI - LIVE SLD</title>
 
 <style>
-.pacCard{
-  fill:#fff;
-  stroke:#263e4c;
-  stroke-width:2
-}
-.pacCard{
-  vector-effect:non-scaling-stroke
-}
-.pacCardOn{
-  stroke:#00a85a;
-  stroke-width:2.5
-}
-.pacCardOff{
-  stroke:#d22c3b;
-  stroke-width:2.5
-}
-.pacText{
-  font-size:13px;
-  font-weight:bold;
-  fill:#203743
-}
-.pacStatus{
-  font-size:9px;
-  font-weight:bold
-}
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
 
 :root{
   --bg:#071018;
   --panel:#0b1b29;
+
   --blue:#08aee7;
-  --blue2:#00eaff;
+  --blue2:#00e676;
+
   --red:#ff2638;
+  --flowRed:#ff8a8a;
   --green:#00e676;
+
   --ink:#10202c;
-  --wire:#506a7a;
+  --wire:#7b8790;
 }
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+  background:var(--bg);
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
 }
 
 body{
-  margin:0;
-  background:var(--bg);
-  font-family:Arial,Helvetica,sans-serif;
-  color:#fff
+  overflow-x:hidden;
 }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .header{
-  height:66px;
+
+  min-height:66px;
+
   background:var(--panel);
+
   border-bottom:1px solid #2b475a;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
-  padding:0 20px;
+
+  padding:8px 20px;
+
   position:sticky;
+
   top:0;
-  z-index:20
+
+  z-index:20;
+
 }
+
 
 .header h1{
+
   margin:0;
+
   font-size:23px;
-  letter-spacing:.5px
+
+  letter-spacing:.5px;
+
 }
+
 
 .right{
+
   display:flex;
-  gap:20px;
+
+  gap:25px;
+
   align-items:center;
-  font-size:12px
+
+  font-size:14px;
+
 }
+
 
 .online{
-  font-weight:bold
+
+  font-weight:bold;
+
 }
+
 
 .online i{
+
   display:inline-block;
+
   width:9px;
+
   height:9px;
+
   border-radius:50%;
+
   margin-right:6px;
-  box-shadow:0 0 12px currentColor
+
+  box-shadow:0 0 12px currentColor;
+
 }
 
-.clock{
-  font-family:monospace;
-  color:#8edfff
-}
 
 .tsLive{
-  color:var(--green)
+
+  color:var(--green);
+
 }
+
 
 .tsLive i{
-  background:var(--green)
+
+  background:var(--green);
+
 }
+
 
 .tsFail{
-  color:#ffb300
+
+  color:#ffb300;
+
 }
+
 
 .tsFail i{
-  background:#ffb300
+
+  background:#ffb300;
+
 }
+
+
+.clock{
+
+  font-family:monospace;
+
+  color:#8edfff;
+
+  font-size:17px;
+
+  font-weight:bold;
+
+  white-space:nowrap;
+
+}
+
+
+/* =========================================================
+   SLD RESPONSIVE
+   ========================================================= */
 
 .canvas{
-  overflow:auto;
-  background:#fff
+
+  width:100%;
+
+  overflow:hidden;
+
+  background:#fff;
+
 }
+
 
 .sld{
-  width:1900px;
-  height:1080px;
-  margin:auto;
-  background:#fff
+
+  width:100%;
+
+  max-width:1900px;
+
+  margin:0 auto;
+
+  background:#fff;
+
 }
+
 
 svg{
-  width:1900px;
-  height:1080px;
-  display:block
+
+  width:100%;
+
+  height:auto;
+
+  display:block;
+
 }
+
 
 text{
-  font-family:Arial,Helvetica,sans-serif
+
+  font-family:Arial,Helvetica,sans-serif;
+
 }
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
 
 .title{
+
   font-size:29px;
+
   font-weight:bold;
-  fill:#111
+
+  fill:#111;
+
 }
+
 
 .sec{
+
   font-size:15px;
+
   font-weight:bold;
-  fill:#284354
+
+  fill:#284354;
+
 }
+
 
 .lbl{
+
   font-size:12px;
+
   font-weight:bold;
-  fill:var(--ink)
+
+  fill:var(--ink);
+
 }
+
 
 .sm{
+
   font-size:10px;
-  fill:#3d5665
+
+  fill:#3d5665;
+
 }
+
 
 .note{
+
   font-size:10px;
-  fill:#617785
+
+  fill:#617785;
+
 }
+
+
+/* =========================================================
+   ALL BASE LINES GRAY
+   ========================================================= */
 
 .wire{
-  stroke:var(--wire);
+
+  stroke:#7b8790;
+
   stroke-width:5;
+
   fill:none;
+
   stroke-linecap:round;
-  stroke-linejoin:round
+
+  stroke-linejoin:round;
+
 }
+
 
 .hv{
-  stroke:var(--red);
+
+  stroke:#7b8790;
+
   stroke-width:7;
+
   fill:none;
+
   stroke-linecap:round;
-  stroke-linejoin:round
+
+  stroke-linejoin:round;
+
 }
+
 
 .bus{
-  stroke:var(--blue);
+
+  stroke:#7b8790;
+
   stroke-width:10;
+
   fill:none;
-  stroke-linecap:round
+
+  stroke-linecap:round;
+
 }
+
+
+/* =========================================================
+   GREEN FLOW
+   ========================================================= */
 
 .flow{
-  stroke:var(--blue2);
+
+  stroke:#00e676;
+
   stroke-width:5;
+
   fill:none;
+
   stroke-linecap:round;
+
   stroke-dasharray:12 17;
+
   animation:flow .62s linear infinite;
-  filter:drop-shadow(0 0 5px var(--blue2))
+
+  filter:drop-shadow(0 0 5px #00e676);
+
 }
 
+
+/* =========================================================
+   LIGHT RED FLOW
+   TRANSFORMER PORJONTO
+   ========================================================= */
+
 .flowRed{
-  stroke:var(--red);
+
+  stroke:#ff8a8a;
+
   stroke-width:5;
+
   fill:none;
+
   stroke-linecap:round;
+
   stroke-dasharray:10 15;
+
   animation:flowred .55s linear infinite;
-  filter:drop-shadow(0 0 5px red)
+
+  filter:drop-shadow(0 0 5px #ff8a8a);
+
 }
+
 
 .flow.off,
 .flowRed.off{
-  opacity:.08;
-  animation-play-state:paused
+
+  opacity:.06;
+
+  animation-play-state:paused;
+
 }
+
 
 @keyframes flow{
+
   to{
-    stroke-dashoffset:-29
+
+    stroke-dashoffset:-29;
+
   }
+
 }
+
 
 @keyframes flowred{
+
   to{
-    stroke-dashoffset:-25
+
+    stroke-dashoffset:-25;
+
   }
+
 }
+
+
+/* =========================================================
+   EQUIPMENT
+   ========================================================= */
 
 .box{
+
   fill:#fff;
+
   stroke:#263e4c;
-  stroke-width:2
+
+  stroke-width:2;
+
 }
+
 
 .breakerOn{
+
   fill:#e8f9ff;
+
   stroke:#25485d;
-  stroke-width:2
+
+  stroke-width:2;
+
 }
+
 
 .breakerOff{
+
   fill:#ffe2e6;
+
   stroke:#8b303b;
-  stroke-width:2
+
+  stroke-width:2;
+
 }
+
 
 .equip{
-  cursor:default
+
+  cursor:default;
+
 }
+
+
+/* =========================================================
+   LED
+   ========================================================= */
 
 .led{
+
   stroke:#fff;
-  stroke-width:2
+
+  stroke-width:2;
+
 }
+
 
 .on{
+
   fill:var(--green);
-  filter:drop-shadow(0 0 5px var(--green))
+
+  filter:drop-shadow(0 0 5px var(--green));
+
 }
+
 
 .off{
+
   fill:var(--red);
-  filter:drop-shadow(0 0 5px var(--red))
+
+  filter:drop-shadow(0 0 5px var(--red));
+
 }
 
-.pacLabel{
-  font-size:13px;
-  font-weight:bold;
-  fill:#203743
+
+/* =========================================================
+   TRANSFORMER INDICATION
+   ========================================================= */
+
+.transformerOn{
+
+  stroke:#00e676 !important;
+
+  stroke-width:4 !important;
+
+  filter:drop-shadow(0 0 8px #00e676);
+
 }
+
+
+.transformerOff{
+
+  stroke:#7b8790 !important;
+
+  stroke-width:2 !important;
+
+  filter:none;
+
+}
+
+
+/* =========================================================
+   PAC
+   ========================================================= */
+
+.pacCard{
+
+  fill:#fff;
+
+  stroke:#263e4c;
+
+  stroke-width:2;
+
+  vector-effect:non-scaling-stroke;
+
+}
+
+
+.pacCardOn{
+
+  stroke:#00a85a;
+
+  stroke-width:2.5;
+
+}
+
+
+.pacCardOff{
+
+  stroke:#d22c3b;
+
+  stroke-width:2.5;
+
+}
+
+
+.pacText{
+
+  font-size:13px;
+
+  font-weight:bold;
+
+  fill:#203743;
+
+}
+
+
+.pacStatus{
+
+  font-size:9px;
+
+  font-weight:bold;
+
+}
+
 
 .pacLed{
+
   stroke:#fff;
-  stroke-width:1.5
+
+  stroke-width:1.5;
+
 }
+
 
 .pacOn{
+
   fill:var(--green);
-  filter:drop-shadow(0 0 5px var(--green))
+
+  filter:drop-shadow(0 0 5px var(--green));
+
 }
+
 
 .pacOff{
+
   fill:var(--red);
-  filter:drop-shadow(0 0 5px var(--red))
+
+  filter:drop-shadow(0 0 5px var(--red));
+
 }
 
-.statusPill{
-  fill:#f5f8fa;
-  stroke:#c7d6de;
-  stroke-width:1
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:768px){
+
+  .header{
+
+    min-height:60px;
+
+    padding:6px 10px;
+
+  }
+
+
+  .header h1{
+
+    font-size:15px;
+
+  }
+
+
+  .right{
+
+    gap:10px;
+
+    font-size:10px;
+
+  }
+
+
+  .clock{
+
+    font-size:13px;
+
+  }
+
+
+  .canvas{
+
+    overflow:hidden;
+
+  }
+
+
+  .sld{
+
+    width:100%;
+
+    max-width:none;
+
+  }
+
+
+  svg{
+
+    width:100%;
+
+    height:auto;
+
+  }
+
+
+  .title{
+
+    font-size:29px;
+
+  }
+
+
+  .sec{
+
+    font-size:15px;
+
+  }
+
+
+  .lbl{
+
+    font-size:12px;
+
+  }
+
+
+  .sm{
+
+    font-size:10px;
+
+  }
+
+
+  .pacText{
+
+    font-size:13px;
+
+  }
+
+
+  .pacStatus{
+
+    font-size:9px;
+
+  }
+
 }
+
+
+@media(max-width:480px){
+
+  .header h1{
+
+    font-size:12px;
+
+  }
+
+
+  .right{
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    gap:2px;
+
+  }
+
+
+  .clock{
+
+    font-size:11px;
+
+  }
+
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+#loginPage{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
+  background:#071018;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-family:Arial,Helvetica,sans-serif;
+
+}
+
+
+.loginBox{
+
+  width:360px;
+
+  max-width:90%;
+
+  background:#0b1b29;
+
+  border:1px solid #2b475a;
+
+  border-radius:12px;
+
+  padding:30px;
+
+  box-shadow:0 0 30px rgba(0,234,255,.15);
+
+  text-align:center;
+
+}
+
+
+.loginTitle{
+
+  font-size:24px;
+
+  font-weight:bold;
+
+  color:#fff;
+
+  margin-bottom:8px;
+
+}
+
+
+.loginCode{
+
+  font-size:13px;
+
+  color:#8edfff;
+
+  margin-bottom:25px;
+
+}
+
+
+#loginPassword{
+
+  width:100%;
+
+  padding:13px;
+
+  border-radius:6px;
+
+  border:1px solid #506a7a;
+
+  background:#071018;
+
+  color:#fff;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+
+.loginButton{
+
+  width:100%;
+
+  margin-top:15px;
+
+  padding:13px;
+
+  border:0;
+
+  border-radius:6px;
+
+  background:#08aee7;
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+}
+
+
+#loginError{
+
+  margin-top:12px;
+
+  color:#ff2638;
+
+  font-size:12px;
+
+  min-height:16px;
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= LOGIN PAGE ================= -->
 
-<div id="loginPage"
-style="
-position:fixed;
-inset:0;
-z-index:99999;
-background:#071018;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:Arial,Helvetica,sans-serif;">
+<!-- =========================================================
+     LOGIN PAGE
+     ========================================================= -->
 
-  <div style="
-  width:360px;
-  max-width:90%;
-  background:#0b1b29;
-  border:1px solid #2b475a;
-  border-radius:12px;
-  padding:30px;
-  box-shadow:0 0 30px rgba(0,234,255,.15);
-  text-align:center;">
+<div id="loginPage">
 
-    <div style="
-    font-size:24px;
-    font-weight:bold;
-    color:#fff;
-    margin-bottom:8px;">
+  <div class="loginBox">
+
+    <div class="loginTitle">
       GREEN FIELD SILIGURI
     </div>
 
-    <div style="
-    font-size:13px;
-    color:#8edfff;
-    margin-bottom:25px;">
+    <div class="loginCode">
       I-WB-SLGR-AG2-0003
     </div>
 
@@ -335,58 +869,47 @@ font-family:Arial,Helvetica,sans-serif;">
       id="loginPassword"
       type="password"
       placeholder="Enter Password"
-      autocomplete="off"
-      style="
-      width:100%;
-      padding:13px;
-      border-radius:6px;
-      border:1px solid #506a7a;
-      background:#071018;
-      color:#fff;
-      font-size:15px;
-      outline:none;">
+      autocomplete="off">
 
-    <button onclick="doLogin()"
-      style="
-      width:100%;
-      margin-top:15px;
-      padding:13px;
-      border:0;
-      border-radius:6px;
-      background:#08aee7;
-      color:#fff;
-      font-size:15px;
-      font-weight:bold;
-      cursor:pointer;">
+    <button
+      class="loginButton"
+      onclick="doLogin()">
+
       LOGIN
+
     </button>
 
-    <div id="loginError"
-      style="
-      margin-top:12px;
-      color:#ff2638;
-      font-size:12px;
-      min-height:16px;">
-    </div>
+    <div id="loginError"></div>
 
   </div>
+
 </div>
 
 
-<!-- ================= HEADER ================= -->
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
 
 <div class="header">
 
-  <h1>SLD - GREEN FIELD SILIGURI</h1>
+  <h1>
+    SLD - GREEN FIELD SILIGURI
+  </h1>
+
 
   <div class="right">
 
-    <div id="tsStatus"
+    <div
+      id="tsStatus"
       class="online tsLive">
-      <i></i>THINGSPEAK LIVE
+
+      <i></i>LIVE
+
     </div>
 
-    <div id="clock"
+
+    <div
+      id="clock"
       class="clock">
     </div>
 
@@ -395,46 +918,71 @@ font-family:Arial,Helvetica,sans-serif;">
 </div>
 
 
+<!-- =========================================================
+     MAIN CANVAS
+     ========================================================= -->
+
 <div class="canvas">
 
 <div class="sld">
 
-<svg viewBox="0 0 1900 1080">
+
+<svg
+viewBox="0 0 1900 1080"
+preserveAspectRatio="xMidYMid meet">
+
+
+<!-- =====================================================
+     TITLE
+     ===================================================== -->
 
 <text
 x="850"
 y="38"
 text-anchor="middle"
 class="title">
+
 SINGLE LINE DIAGRAM — GREEN FIELD SILIGURI
+
 </text>
+
 
 <text
 x="850"
 y="65"
 text-anchor="middle"
 class="sec">
+
 I-WB-SLGR-AG2-0003
+
 </text>
 
 
-<!-- ===================== INCOMING ===================== -->
+<!-- =====================================================
+     INCOMING
+     ===================================================== -->
 
 <text
 x="850"
 y="92"
 text-anchor="middle"
 class="sec">
+
 33/11 kV INCOMING &amp; HT DISTRIBUTION
+
 </text>
 
-<path class="hv"
+
+<path
+class="hv"
 d="M70 145 H330"/>
+
 
 <path
 id="flowIncoming"
 class="flowRed"
 d="M70 145 H330"/>
+
 
 <g class="equip">
 
@@ -446,29 +994,38 @@ width="150"
 height="54"
 rx="4"/>
 
+
 <text
 x="100"
 y="140"
 text-anchor="middle"
 class="lbl">
+
 HOUSING BOARD
+
 </text>
+
 
 <text
 x="100"
 y="158"
 text-anchor="middle"
 class="sm">
+
 33/11 KV
+
 </text>
 
 </g>
+
 
 <text
 x="220"
 y="135"
 class="sm">
+
 2 POLE STRUCTURE
+
 </text>
 
 
@@ -482,20 +1039,26 @@ width="155"
 height="54"
 rx="4"/>
 
+
 <text
 x="407"
 y="140"
 text-anchor="middle"
 class="lbl">
+
 WBSEDCL HT METER
+
 </text>
+
 
 <text
 x="407"
 y="158"
 text-anchor="middle"
 class="sm">
+
 ROOM
+
 </text>
 
 </g>
@@ -516,21 +1079,28 @@ width="135"
 height="54"
 rx="4"/>
 
+
 <text
 x="637"
 y="140"
 text-anchor="middle"
 class="lbl">
+
 IC-OG PANEL
+
 </text>
+
 
 <text
 x="637"
 y="158"
 text-anchor="middle"
 class="sm">
+
 HT PANEL
+
 </text>
+
 
 <circle
 id="led_icog"
@@ -545,6 +1115,7 @@ r="8"/>
 <path
 class="hv"
 d="M705 145 H850 V235"/>
+
 
 <path
 id="flowIC"
@@ -562,21 +1133,28 @@ width="110"
 height="52"
 rx="5"/>
 
+
 <text
 x="850"
 y="214"
 text-anchor="middle"
 class="lbl">
+
 I/C VCB
+
 </text>
+
 
 <text
 x="850"
 y="231"
 text-anchor="middle"
 class="sm">
+
 INCOMER
+
 </text>
+
 
 <circle
 id="led_ic"
@@ -588,33 +1166,42 @@ r="7"/>
 </g>
 
 
+<!-- HT SPLIT -->
+
 <path
 class="hv"
 d="M850 235 V285 H520 V330"/>
+
 
 <path
 class="hv"
 d="M850 235 V330"/>
 
+
 <path
 class="hv"
 d="M850 235 V285 H1180 V330"/>
+
 
 <path
 id="flowOG1"
 class="flowRed"
 d="M850 235 V285 H520 V330"/>
 
+
 <path
 id="flowOG2"
 class="flowRed"
 d="M850 235 V330"/>
+
 
 <path
 id="flowOG3"
 class="flowRed"
 d="M850 235 V285 H1180 V330"/>
 
+
+<!-- O/G 1 -->
 
 <g>
 
@@ -626,21 +1213,28 @@ width="130"
 height="52"
 rx="5"/>
 
+
 <text
 x="520"
 y="351"
 text-anchor="middle"
 class="lbl">
+
 O/G VCB 1
+
 </text>
+
 
 <text
 x="520"
 y="368"
 text-anchor="middle"
 class="sm">
+
 FEEDER 1
+
 </text>
+
 
 <circle
 id="led_og1"
@@ -652,6 +1246,8 @@ r="7"/>
 </g>
 
 
+<!-- O/G 2 -->
+
 <g>
 
 <rect
@@ -662,31 +1258,40 @@ width="130"
 height="52"
 rx="5"/>
 
+
 <text
 x="850"
 y="351"
 text-anchor="middle"
 class="lbl">
+
 O/G VCB 2
+
 </text>
+
 
 <text
 x="850"
 y="368"
 text-anchor="middle"
 class="sm">
+
 FEEDER 2
+
 </text>
+
 
 <circle
 id="led_og2"
-class="led on"
+class="led off"
 cx="895"
 cy="343"
 r="7"/>
 
 </g>
 
+
+<!-- O/G 3 -->
 
 <g>
 
@@ -698,21 +1303,28 @@ width="130"
 height="52"
 rx="5"/>
 
+
 <text
 x="1180"
 y="351"
 text-anchor="middle"
 class="lbl">
+
 O/G VCB 3
+
 </text>
+
 
 <text
 x="1180"
 y="368"
 text-anchor="middle"
 class="sm">
+
 FEEDER 3
+
 </text>
+
 
 <circle
 id="led_og3"
@@ -724,20 +1336,25 @@ r="7"/>
 </g>
 
 
-<!-- TRANSFORMER -->
+<!-- =====================================================
+     TRANSFORMER
+     ===================================================== -->
 
 <path
 class="wire"
 d="M520 382 V475"/>
 
+
 <path
 id="flowTX"
-class="flow"
+class="flowRed"
 d="M520 382 V475"/>
+
 
 <g>
 
 <circle
+id="transformerSymbol"
 cx="520"
 cy="510"
 r="34"
@@ -745,29 +1362,38 @@ fill="#fff"
 stroke="#263e4c"
 stroke-width="2"/>
 
+
 <path
 d="M492 493 Q520 510 492 527 M548 493 Q520 510 548 527"
 fill="none"
 stroke="#263e4c"
 stroke-width="3"/>
 
+
 <text
 x="570"
 y="505"
 class="lbl">
+
 2000 KVA
+
 </text>
+
 
 <text
 x="570"
 y="522"
 class="sm">
+
 TRANSFORMER
+
 </text>
+
 
 <path
 class="wire"
 d="M520 544 V680"/>
+
 
 <path
 id="flowTX2"
@@ -777,14 +1403,18 @@ d="M520 544 V680"/>
 </g>
 
 
-<!-- ===================== DG ===================== -->
+<!-- =====================================================
+     DG
+     ===================================================== -->
 
 <text
 x="850"
 y="420"
 text-anchor="middle"
 class="sec">
+
 DG-1 / DG-2 GENERATION
+
 </text>
 
 
@@ -797,16 +1427,22 @@ x="275"
 y="470"
 text-anchor="middle"
 class="lbl">
+
 DG 1
+
 </text>
+
 
 <text
 x="275"
 y="487"
 text-anchor="middle"
 class="sm">
+
 910 KVA
+
 </text>
+
 
 <circle
 cx="275"
@@ -815,6 +1451,7 @@ r="29"
 fill="#fff"
 stroke="#263e4c"
 stroke-width="2"/>
+
 
 <path
 d="M255 525 Q275 505 295 525"
@@ -840,21 +1477,28 @@ width="100"
 height="42"
 rx="4"/>
 
+
 <text
 x="275"
 y="594"
 text-anchor="middle"
 class="lbl">
+
 ISOLATOR
+
 </text>
+
 
 <text
 x="275"
 y="609"
 text-anchor="middle"
 class="sm">
+
 DG1
+
 </text>
+
 
 <circle
 id="led_iso1"
@@ -869,6 +1513,7 @@ r="7"/>
 <path
 class="wire"
 d="M275 617 V685"/>
+
 
 <path
 class="wire"
@@ -885,13 +1530,17 @@ width="125"
 height="44"
 rx="4"/>
 
+
 <text
 x="397"
 y="594"
 text-anchor="middle"
 class="lbl">
+
 N-CONTACTOR
+
 </text>
+
 
 <text
 id="txt_nc1"
@@ -899,8 +1548,11 @@ x="397"
 y="610"
 text-anchor="middle"
 class="sm">
+
 ● ON
+
 </text>
+
 
 <circle
 id="led_nc1"
@@ -929,21 +1581,28 @@ width="120"
 height="55"
 rx="4"/>
 
+
 <text
 x="425"
 y="678"
 text-anchor="middle"
 class="lbl">
+
 DG1 ACB
+
 </text>
+
 
 <text
 x="425"
 y="696"
 text-anchor="middle"
 class="sm">
+
 1600A • MLTP
+
 </text>
+
 
 <circle
 id="led_dg1"
@@ -969,16 +1628,22 @@ x="1425"
 y="470"
 text-anchor="middle"
 class="lbl">
+
 DG 2
+
 </text>
+
 
 <text
 x="1425"
 y="487"
 text-anchor="middle"
 class="sm">
+
 910 KVA
+
 </text>
+
 
 <circle
 cx="1425"
@@ -987,6 +1652,7 @@ r="29"
 fill="#fff"
 stroke="#263e4c"
 stroke-width="2"/>
+
 
 <path
 d="M1405 525 Q1425 505 1445 525"
@@ -1012,21 +1678,28 @@ width="100"
 height="42"
 rx="4"/>
 
+
 <text
 x="1425"
 y="594"
 text-anchor="middle"
 class="lbl">
+
 ISOLATOR
+
 </text>
+
 
 <text
 x="1425"
 y="609"
 text-anchor="middle"
 class="sm">
+
 DG2
+
 </text>
+
 
 <circle
 id="led_iso2"
@@ -1041,6 +1714,7 @@ r="7"/>
 <path
 class="wire"
 d="M1425 617 V685"/>
+
 
 <path
 class="wire"
@@ -1057,13 +1731,17 @@ width="125"
 height="44"
 rx="4"/>
 
+
 <text
 x="1297"
 y="594"
 text-anchor="middle"
 class="lbl">
+
 N-CONTACTOR
+
 </text>
+
 
 <text
 id="txt_nc2"
@@ -1071,8 +1749,11 @@ x="1297"
 y="610"
 text-anchor="middle"
 class="sm">
+
 ● ON
+
 </text>
+
 
 <circle
 id="led_nc2"
@@ -1101,21 +1782,28 @@ width="120"
 height="55"
 rx="4"/>
 
+
 <text
 x="1275"
 y="678"
 text-anchor="middle"
 class="lbl">
+
 DG2 ACB
+
 </text>
+
 
 <text
 x="1275"
 y="696"
 text-anchor="middle"
 class="sm">
+
 1600A • MLTP
+
 </text>
+
 
 <circle
 id="led_dg2"
@@ -1132,46 +1820,58 @@ class="wire"
 d="M1275 710 V755"/>
 
 
-<!-- ================= MLTP MAIN BUS ================= -->
+<!-- =====================================================
+     MLTP BUS
+     ===================================================== -->
 
 <text
 x="850"
 y="735"
 text-anchor="middle"
 class="sec">
+
 MLTP PANEL — MAIN BUSBAR 3200A
+
 </text>
+
 
 <path
 class="bus"
 d="M150 770 H1550"/>
+
 
 <path
 id="flowMain"
 class="flow"
 d="M150 770 H1550"/>
 
+
 <path
 class="wire"
 d="M520 680 V770"/>
+
 
 <path
 id="flowTXBus"
 class="flow"
 d="M520 680 V770"/>
 
+
 <path
 class="wire"
 d="M425 710 V770"/>
+
 
 <path
 id="flowDG1Bus"
 class="flow"
 d="M425 710 V770"/>
 
+
 <path
 class="wire"
 d="M1275 710 V770"/>
+
 
 <path
 id="flowDG2Bus"
@@ -1189,21 +1889,28 @@ width="130"
 height="50"
 rx="4"/>
 
+
 <text
 x="850"
 y="766"
 text-anchor="middle"
 class="lbl">
+
 BUS COUPLER
+
 </text>
+
 
 <text
 x="850"
 y="783"
 text-anchor="middle"
 class="sm">
+
 3200A
+
 </text>
+
 
 <circle
 id="led_mbc"
@@ -1215,16 +1922,20 @@ r="7"/>
 </g>
 
 
-<!-- 250 KVA UPS -->
+<!-- =====================================================
+     250 KVA UPS
+     ===================================================== -->
 
 <path
 class="wire"
 d="M275 770 V835"/>
 
+
 <path
 id="flowUPS2501"
 class="flow"
 d="M275 770 V835"/>
+
 
 <g>
 
@@ -1236,21 +1947,28 @@ width="170"
 height="55"
 rx="5"/>
 
+
 <text
 x="275"
 y="857"
 text-anchor="middle"
 class="lbl">
+
 250 KVA UPS 1
+
 </text>
+
 
 <text
 x="275"
 y="875"
 text-anchor="middle"
 class="sm">
+
 MLTP LEFT FEED
+
 </text>
+
 
 <circle
 id="led_ups2501"
@@ -1266,10 +1984,12 @@ r="7"/>
 class="wire"
 d="M1425 770 V835"/>
 
+
 <path
 id="flowUPS2502"
 class="flow"
 d="M1425 770 V835"/>
+
 
 <g>
 
@@ -1281,21 +2001,28 @@ width="170"
 height="55"
 rx="5"/>
 
+
 <text
 x="1425"
 y="857"
 text-anchor="middle"
 class="lbl">
+
 250 KVA UPS 2
+
 </text>
+
 
 <text
 x="1425"
 y="875"
 text-anchor="middle"
 class="sm">
+
 MLTP RIGHT FEED
+
 </text>
+
 
 <circle
 id="led_ups2502"
@@ -1307,20 +2034,25 @@ r="7"/>
 </g>
 
 
-<!-- MLTP OUTGOING -->
+<!-- =====================================================
+     MLTP OUTGOING
+     ===================================================== -->
 
 <path
 class="wire"
 d="M620 770 V850"/>
+
 
 <path
 class="wire"
 d="M1080 770 V850"/>
 
+
 <path
 id="flowOut1"
 class="flow"
 d="M620 770 V850"/>
+
 
 <path
 id="flowOut2"
@@ -1338,21 +2070,28 @@ width="90"
 height="48"
 rx="4"/>
 
+
 <text
 x="620"
 y="870"
 text-anchor="middle"
 class="sm">
+
 OUTGOING 1
+
 </text>
+
 
 <text
 x="620"
 y="885"
 text-anchor="middle"
 class="sm">
+
 2000A
+
 </text>
+
 
 <circle
 id="led_out1"
@@ -1374,21 +2113,28 @@ width="90"
 height="48"
 rx="4"/>
 
+
 <text
 x="1080"
 y="870"
 text-anchor="middle"
 class="sm">
+
 OUTGOING 2
+
 </text>
+
 
 <text
 x="1080"
 y="885"
 text-anchor="middle"
 class="sm">
+
 2000A
+
 </text>
+
 
 <circle
 id="led_out2"
@@ -1400,37 +2146,47 @@ r="6"/>
 </g>
 
 
-<!-- ================= MPDB ================= -->
+<!-- =====================================================
+     MPDB
+     ===================================================== -->
 
 <text
 x="850"
 y="930"
 text-anchor="middle"
 class="sec">
+
 MPDB PANEL — 2500A BUS
+
 </text>
+
 
 <path
 class="bus"
 d="M150 955 H1550"/>
+
 
 <path
 id="flowMPDB"
 class="flow"
 d="M150 955 H1550"/>
 
+
 <path
 class="wire"
 d="M620 898 V955"/>
+
 
 <path
 class="wire"
 d="M1080 898 V955"/>
 
+
 <path
 id="flowMPDB1"
 class="flow"
 d="M620 898 V955"/>
+
 
 <path
 id="flowMPDB2"
@@ -1448,21 +2204,28 @@ width="130"
 height="48"
 rx="4"/>
 
+
 <text
 x="620"
 y="950"
 text-anchor="middle"
 class="sm">
+
 MPDB INCOMER 1
+
 </text>
+
 
 <text
 x="620"
 y="965"
 text-anchor="middle"
 class="sm">
+
 2500A
+
 </text>
+
 
 <circle
 id="led_mi1"
@@ -1484,21 +2247,28 @@ width="130"
 height="48"
 rx="4"/>
 
+
 <text
 x="1080"
 y="950"
 text-anchor="middle"
 class="sm">
+
 MPDB INCOMER 2
+
 </text>
+
 
 <text
 x="1080"
 y="965"
 text-anchor="middle"
 class="sm">
+
 2500A
+
 </text>
+
 
 <circle
 id="led_mi2"
@@ -1520,21 +2290,28 @@ width="130"
 height="50"
 rx="4"/>
 
+
 <text
 x="850"
 y="952"
 text-anchor="middle"
 class="lbl">
+
 BUS COUPLER
+
 </text>
+
 
 <text
 x="850"
 y="968"
 text-anchor="middle"
 class="sm">
+
 2500A
+
 </text>
+
 
 <circle
 id="led_pbc"
@@ -1546,9 +2323,12 @@ r="7"/>
 </g>
 
 
-<!-- ================= PAC STATUS ================= -->
+<!-- =====================================================
+     PAC SIDE PANELS
+     ===================================================== -->
 
 <g id="pacSidePanel">
+
 
 <rect
 x="8"
@@ -1560,6 +2340,7 @@ fill="#f7fafc"
 stroke="#b9cbd5"
 stroke-width="2"/>
 
+
 <rect
 x="1687"
 y="300"
@@ -1570,41 +2351,53 @@ fill="#f7fafc"
 stroke="#b9cbd5"
 stroke-width="2"/>
 
+
 <text
 x="110"
 y="325"
 text-anchor="middle"
 class="sec">
+
 PAC 1–9
+
 </text>
+
 
 <text
 x="1790"
 y="325"
 text-anchor="middle"
 class="sec">
+
 PAC 10–18
+
 </text>
+
 
 <g id="pacGroup"></g>
 
 </g>
 
 
-<!-- ================= 20 KVA UPS + SMPS ================= -->
+<!-- =====================================================
+     20 KVA UPS / SMPS
+     ===================================================== -->
 
 <text
 x="850"
 y="1000"
 text-anchor="middle"
 class="sec">
+
 20 KVA UPS &amp; SMPS STATUS
+
 </text>
 
 
 <path
 class="wire"
 d="M325 955 V1015"/>
+
 
 <path
 id="flow20U1"
@@ -1616,6 +2409,7 @@ d="M325 955 V1015"/>
 class="wire"
 d="M490 955 V1015"/>
 
+
 <path
 id="flowSM1"
 class="flow"
@@ -1625,6 +2419,7 @@ d="M490 955 V1015"/>
 <path
 class="wire"
 d="M630 955 V1015"/>
+
 
 <path
 id="flowSM2"
@@ -1636,6 +2431,7 @@ d="M630 955 V1015"/>
 class="wire"
 d="M1070 955 V1015"/>
 
+
 <path
 id="flowSM3"
 class="flow"
@@ -1646,6 +2442,7 @@ d="M1070 955 V1015"/>
 class="wire"
 d="M1210 955 V1015"/>
 
+
 <path
 id="flowSM4"
 class="flow"
@@ -1655,6 +2452,7 @@ d="M1210 955 V1015"/>
 <path
 class="wire"
 d="M1375 955 V1015"/>
+
 
 <path
 id="flow20U2"
@@ -1672,13 +2470,17 @@ width="150"
 height="48"
 rx="5"/>
 
+
 <text
 x="325"
 y="1036"
 text-anchor="middle"
 class="lbl">
+
 20 KVA UPS 1
+
 </text>
+
 
 <text
 id="txt_20u1"
@@ -1686,8 +2488,11 @@ x="325"
 y="1053"
 text-anchor="middle"
 class="sm">
+
 ONLINE
+
 </text>
+
 
 <circle
 id="led_20u1"
@@ -1709,13 +2514,17 @@ width="120"
 height="48"
 rx="5"/>
 
+
 <text
 x="490"
 y="1042"
 text-anchor="middle"
 class="lbl">
+
 SMPS-1
+
 </text>
+
 
 <circle
 id="led_sm1"
@@ -1737,13 +2546,17 @@ width="120"
 height="48"
 rx="5"/>
 
+
 <text
 x="630"
 y="1042"
 text-anchor="middle"
 class="lbl">
+
 SMPS-2
+
 </text>
+
 
 <circle
 id="led_sm2"
@@ -1765,13 +2578,17 @@ width="120"
 height="48"
 rx="5"/>
 
+
 <text
 x="1070"
 y="1042"
 text-anchor="middle"
 class="lbl">
+
 SMPS-3
+
 </text>
+
 
 <circle
 id="led_sm3"
@@ -1793,13 +2610,17 @@ width="120"
 height="48"
 rx="5"/>
 
+
 <text
 x="1210"
 y="1042"
 text-anchor="middle"
 class="lbl">
+
 SMPS-4
+
 </text>
+
 
 <circle
 id="led_sm4"
@@ -1821,13 +2642,17 @@ width="150"
 height="48"
 rx="5"/>
 
+
 <text
 x="1375"
 y="1036"
 text-anchor="middle"
 class="lbl">
+
 20 KVA UPS 2
+
 </text>
+
 
 <text
 id="txt_20u2"
@@ -1835,8 +2660,11 @@ x="1375"
 y="1053"
 text-anchor="middle"
 class="sm">
+
 ONLINE
+
 </text>
+
 
 <circle
 id="led_20u2"
@@ -1853,59 +2681,80 @@ x="850"
 y="1075"
 text-anchor="middle"
 class="note">
+
 GREEN = ON • RED = OFF • LIVE STATUS FROM 6 THINGSPEAK CHANNELS • AUTO REFRESH 15 SEC
+
 </text>
 
+
 </svg>
+
 </div>
+
 </div>
 
 
 <script>
 
+
 /* =========================================================
    STATUS
    ========================================================= */
 
-const status = {
+const status={
 
  "IC-OG PANEL":false,
+
  "I/C VCB":false,
+
  "O/G VCB 1":false,
+
  "O/G VCB 2":false,
+
  "O/G VCB 3":false,
 
  "2000 KVA TRANSFORMER":false,
 
  "DG1 ISOLATOR":false,
+
  "DG2 ISOLATOR":false,
 
  "DG1 NEUTRAL CONTACTOR":false,
+
  "DG2 NEUTRAL CONTACTOR":false,
 
  "DG1 ACB 1600A":false,
+
  "DG2 ACB 1600A":false,
 
  "MLTP BUS COUPLER ACB 3200A":false,
 
  "MLTP OUTGOING 1 ACB 2000A":false,
+
  "MLTP OUTGOING 2 ACB 2000A":false,
 
  "MPDB INCOMER 1 ACB 2500A":false,
+
  "MPDB INCOMER 2 ACB 2500A":false,
 
  "MPDB BUS COUPLER ACB 2500A":false,
 
  "250 KVA UPS 1":false,
+
  "250 KVA UPS 2":false,
 
  "20 KVA UPS 1":false,
+
  "20 KVA UPS 2":false,
 
  "SMPS 1":false,
+
  "SMPS 2":false,
+
  "SMPS 3":false,
+
  "SMPS 4":false
+
 };
 
 
@@ -1916,52 +2765,66 @@ const status = {
 const leds={
 
  "IC-OG PANEL":"led_icog",
+
  "I/C VCB":"led_ic",
 
  "O/G VCB 1":"led_og1",
+
  "O/G VCB 2":"led_og2",
+
  "O/G VCB 3":"led_og3",
 
  "DG1 ISOLATOR":"led_iso1",
+
  "DG2 ISOLATOR":"led_iso2",
 
  "DG1 NEUTRAL CONTACTOR":"led_nc1",
+
  "DG2 NEUTRAL CONTACTOR":"led_nc2",
 
  "DG1 ACB 1600A":"led_dg1",
+
  "DG2 ACB 1600A":"led_dg2",
 
  "MLTP BUS COUPLER ACB 3200A":"led_mbc",
 
  "MLTP OUTGOING 1 ACB 2000A":"led_out1",
+
  "MLTP OUTGOING 2 ACB 2000A":"led_out2",
 
  "MPDB INCOMER 1 ACB 2500A":"led_mi1",
+
  "MPDB INCOMER 2 ACB 2500A":"led_mi2",
 
  "MPDB BUS COUPLER ACB 2500A":"led_pbc",
 
  "250 KVA UPS 1":"led_ups2501",
+
  "250 KVA UPS 2":"led_ups2502",
 
  "20 KVA UPS 1":"led_20u1",
+
  "20 KVA UPS 2":"led_20u2",
 
  "SMPS 1":"led_sm1",
+
  "SMPS 2":"led_sm2",
+
  "SMPS 3":"led_sm3",
+
  "SMPS 4":"led_sm4"
 
 };
 
 
 /* =========================================================
-   BREAKER MAP
+   BREAKERS
    ========================================================= */
 
 const breakers={
 
  "DG1 ACB 1600A":"b_dg1",
+
  "DG2 ACB 1600A":"b_dg2"
 
 };
@@ -1973,13 +2836,20 @@ const breakers={
 
 function setLed(name,on){
 
-  const e=document.getElementById(leds[name]);
+  const e=document.getElementById(
+    leds[name]
+  );
 
   if(!e)return;
 
-  e.classList.remove("on","off");
+  e.classList.remove(
+    "on",
+    "off"
+  );
 
-  e.classList.add(on?"on":"off");
+  e.classList.add(
+    on ? "on" : "off"
+  );
 
 }
 
@@ -1990,13 +2860,22 @@ function setLed(name,on){
 
 function setBreaker(name,on){
 
-  const e=document.getElementById(breakers[name]);
+  const e=document.getElementById(
+    breakers[name]
+  );
 
   if(!e)return;
 
-  e.classList.remove("breakerOn","breakerOff");
+  e.classList.remove(
+    "breakerOn",
+    "breakerOff"
+  );
 
-  e.classList.add(on?"breakerOn":"breakerOff");
+  e.classList.add(
+    on
+      ? "breakerOn"
+      : "breakerOff"
+  );
 
 }
 
@@ -2011,7 +2890,10 @@ function flow(id,on){
 
   if(e){
 
-    e.classList.toggle("off",!on);
+    e.classList.toggle(
+      "off",
+      !on
+    );
 
   }
 
@@ -2024,188 +2906,417 @@ function flow(id,on){
 
 function update(){
 
+
+  /* LED */
+
   Object.keys(leds).forEach(
-    n=>setLed(n,!!status[n])
+    n=>setLed(
+      n,
+      !!status[n]
+    )
   );
 
+
+  /* BREAKER */
 
   Object.keys(breakers).forEach(
-    n=>setBreaker(n,!!status[n])
+    n=>setBreaker(
+      n,
+      !!status[n]
+    )
   );
 
 
-  document.getElementById("txt_nc1").textContent =
-    status["DG1 NEUTRAL CONTACTOR"]
+  /* CONTACTOR TEXT */
+
+  document.getElementById(
+    "txt_nc1"
+  ).textContent=
+
+    status[
+      "DG1 NEUTRAL CONTACTOR"
+    ]
+
     ? "● ON"
     : "● OFF";
 
 
-  document.getElementById("txt_nc2").textContent =
-    status["DG2 NEUTRAL CONTACTOR"]
+  document.getElementById(
+    "txt_nc2"
+  ).textContent=
+
+    status[
+      "DG2 NEUTRAL CONTACTOR"
+    ]
+
     ? "● ON"
     : "● OFF";
 
 
-  document.getElementById("txt_20u1").textContent =
-    status["20 KVA UPS 1"]
+  /* UPS TEXT */
+
+  document.getElementById(
+    "txt_20u1"
+  ).textContent=
+
+    status[
+      "20 KVA UPS 1"
+    ]
+
     ? "ONLINE"
     : "OFF";
 
 
-  document.getElementById("txt_20u2").textContent =
-    status["20 KVA UPS 2"]
+  document.getElementById(
+    "txt_20u2"
+  ).textContent=
+
+    status[
+      "20 KVA UPS 2"
+    ]
+
     ? "ONLINE"
     : "OFF";
 
 
-  /* ================= INCOMING ================= */
+  /* =====================================================
+     INCOMING
+     ===================================================== */
 
-  const incoming =
+  const incoming=
+
     status["IC-OG PANEL"] &&
+
     status["I/C VCB"];
 
 
-  const og1 =
+  /* =====================================================
+     O/G VCB
+     ===================================================== */
+
+  const og1=
+
     incoming &&
+
     status["O/G VCB 1"];
 
 
-  const og2 =
-    incoming;
+  /*
+     O/G VCB 2 is intentionally disabled.
+  */
+
+  const og2=false;
 
 
-  const og3 =
-    incoming;
+  const og3=
+
+    incoming &&
+
+    status["O/G VCB 3"];
 
 
-  /* ================= TRANSFORMER ================= */
+  /* =====================================================
+     TRANSFORMER
+     O/G VCB1 ON = TRANSFORMER ON
+     ===================================================== */
 
-  const tx =
-    og1 &&
-    status["2000 KVA TRANSFORMER"];
+  const tx=
+
+    og1;
 
 
-  /* ================= DG ================= */
+  status[
+    "2000 KVA TRANSFORMER"
+  ]=tx;
 
-  const dg1 =
+
+  /* =====================================================
+     TRANSFORMER VISUAL
+     ===================================================== */
+
+  const transformer=
+
+    document.getElementById(
+      "transformerSymbol"
+    );
+
+
+  if(transformer){
+
+    transformer.classList.remove(
+      "transformerOn",
+      "transformerOff"
+    );
+
+
+    transformer.classList.add(
+      tx
+        ? "transformerOn"
+        : "transformerOff"
+    );
+
+  }
+
+
+  /* =====================================================
+     DG
+     ===================================================== */
+
+  const dg1=
+
     status["DG1 ISOLATOR"] &&
+
     status["DG1 NEUTRAL CONTACTOR"] &&
+
     status["DG1 ACB 1600A"];
 
 
-  const dg2 =
+  const dg2=
+
     status["DG2 ISOLATOR"] &&
+
     status["DG2 NEUTRAL CONTACTOR"] &&
+
     status["DG2 ACB 1600A"];
 
 
-  /* ================= MAIN BUS ================= */
+  /* =====================================================
+     MAIN BUS
+     ===================================================== */
 
-  const main =
+  const main=
+
     tx ||
     dg1 ||
     dg2;
 
 
-  /* ================= MLTP OUTGOING ================= */
+  /* =====================================================
+     OUTGOING
+     ===================================================== */
 
-  const out1 =
+  const out1=
+
     main &&
-    status["MLTP OUTGOING 1 ACB 2000A"];
+
+    status[
+      "MLTP OUTGOING 1 ACB 2000A"
+    ];
 
 
-  const out2 =
+  const out2=
+
     main &&
-    status["MLTP OUTGOING 2 ACB 2000A"];
+
+    status[
+      "MLTP OUTGOING 2 ACB 2000A"
+    ];
 
 
-  /* ================= MPDB ================= */
+  /* =====================================================
+     MPDB
+     ===================================================== */
 
-  const mpdb =
+  const mpdb=
+
     out1 ||
     out2;
 
 
-  /* ================= FLOW ================= */
+  /* =====================================================
+     HT FLOW
+     LIGHT RED
+     ===================================================== */
 
-  flow("flowIncoming",incoming);
-
-  flow("flowIC",incoming);
-
-  flow("flowOG1",og1);
-  flow("flowOG2",og2);
-  flow("flowOG3",og3);
-
-  flow("flowTX",tx);
-  flow("flowTX2",tx);
-  flow("flowTXBus",tx);
-
-  flow("flowDG1",dg1);
-  flow("flowDG1Bus",dg1);
-
-  flow("flowDG2",dg2);
-  flow("flowDG2Bus",dg2);
-
-  flow("flowMain",main);
-
-  flow("flowOut1",out1);
-  flow("flowOut2",out2);
-
-  flow("flowMPDB",mpdb);
-
-  flow("flowMPDB1",out1);
-  flow("flowMPDB2",out2);
+  flow(
+    "flowIncoming",
+    incoming
+  );
 
 
-  /* ================= 250 KVA UPS ================= */
+  flow(
+    "flowIC",
+    incoming
+  );
+
+
+  flow(
+    "flowOG1",
+    og1
+  );
+
+
+  flow(
+    "flowOG2",
+    false
+  );
+
+
+  flow(
+    "flowOG3",
+    og3
+  );
+
+
+  flow(
+    "flowTX",
+    tx
+  );
+
+
+  /* =====================================================
+     GREEN FLOW AFTER TRANSFORMER
+     ===================================================== */
+
+  flow(
+    "flowTX2",
+    tx
+  );
+
+
+  flow(
+    "flowTXBus",
+    tx
+  );
+
+
+  flow(
+    "flowDG1",
+    dg1
+  );
+
+
+  flow(
+    "flowDG1Bus",
+    dg1
+  );
+
+
+  flow(
+    "flowDG2",
+    dg2
+  );
+
+
+  flow(
+    "flowDG2Bus",
+    dg2
+  );
+
+
+  flow(
+    "flowMain",
+    main
+  );
+
+
+  flow(
+    "flowOut1",
+    out1
+  );
+
+
+  flow(
+    "flowOut2",
+    out2
+  );
+
+
+  flow(
+    "flowMPDB",
+    mpdb
+  );
+
+
+  flow(
+    "flowMPDB1",
+    out1
+  );
+
+
+  flow(
+    "flowMPDB2",
+    out2
+  );
+
+
+  /* =====================================================
+     250 KVA UPS
+     ===================================================== */
 
   flow(
     "flowUPS2501",
-    status["250 KVA UPS 1"] && main
+
+    status[
+      "250 KVA UPS 1"
+    ] && main
   );
 
 
   flow(
     "flowUPS2502",
-    status["250 KVA UPS 2"] && main
+
+    status[
+      "250 KVA UPS 2"
+    ] && main
   );
 
 
-  /* ================= 20 KVA UPS / SMPS ================= */
+  /* =====================================================
+     20 KVA UPS / SMPS
+     ===================================================== */
 
   flow(
     "flow20U1",
-    status["20 KVA UPS 1"] && mpdb
+
+    status[
+      "20 KVA UPS 1"
+    ] && mpdb
   );
 
 
   flow(
     "flowSM1",
-    status["SMPS 1"] && mpdb
+
+    status[
+      "SMPS 1"
+    ] && mpdb
   );
 
 
   flow(
     "flowSM2",
-    status["SMPS 2"] && mpdb
+
+    status[
+      "SMPS 2"
+    ] && mpdb
   );
 
 
   flow(
     "flowSM3",
-    status["SMPS 3"] && mpdb
+
+    status[
+      "SMPS 3"
+    ] && mpdb
   );
 
 
   flow(
     "flowSM4",
-    status["SMPS 4"] && mpdb
+
+    status[
+      "SMPS 4"
+    ] && mpdb
   );
 
 
   flow(
     "flow20U2",
-    status["20 KVA UPS 2"] && mpdb
+
+    status[
+      "20 KVA UPS 2"
+    ] && mpdb
   );
 
 }
@@ -2216,10 +3327,14 @@ function update(){
    ========================================================= */
 
 const pacGroup=
-  document.getElementById("pacGroup");
+
+  document.getElementById(
+    "pacGroup"
+  );
 
 
 const pacY=[
+
   350,
   400,
   450,
@@ -2229,6 +3344,7 @@ const pacY=[
   650,
   700,
   750
+
 ];
 
 
@@ -2236,35 +3352,50 @@ for(let i=1;i<=18;i++){
 
   const left=i<=9;
 
+
   const num=
+
     left
-    ? i
-    : i-9;
+      ? i
+      : i-9;
+
 
   const y=
-    pacY[num-1];
+
+    pacY[
+      num-1
+    ];
+
 
   const x=
+
     left
-    ? 20
-    : 1695;
+      ? 20
+      : 1695;
+
 
   const w=180;
 
+
   const ledX=
+
     left
-    ? 185
-    : 1865;
+      ? 185
+      : 1865;
+
 
   const textX=
+
     left
-    ? 38
-    : 1713;
+      ? 38
+      : 1713;
+
 
   const anchor="start";
 
 
   const g=
+
     document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
@@ -2287,7 +3418,9 @@ for(let i=1;i<=18;i++){
       y="${y+2}"
       text-anchor="${anchor}"
       class="pacText">
+
       PAC ${i}
+
     </text>
 
     <circle
@@ -2304,14 +3437,20 @@ for(let i=1;i<=18;i++){
       text-anchor="end"
       class="pacStatus"
       fill="#008f4c">
+
       ON
+
     </text>
+
   `;
 
 
   pacGroup.appendChild(g);
 
-  status["PAC "+i]=true;
+
+  status[
+    "PAC "+i
+  ]=true;
 
 }
 
@@ -2323,27 +3462,39 @@ for(let i=1;i<=18;i++){
 function applyPAC(name,on){
 
   const num=
+
     Number(
-      String(name).replace(/\D/g,"")
+      String(name)
+      .replace(/\D/g,"")
     );
 
 
-  if(num<1 || num>18)return;
+  if(
+    num<1 ||
+    num>18
+  ){
+
+    return;
+
+  }
 
 
   const led=
+
     document.getElementById(
       "pacLed"+num
     );
 
 
   const box=
+
     document.getElementById(
       "pacBox"+num
     );
 
 
   const state=
+
     document.getElementById(
       "pacState"+num
     );
@@ -2356,10 +3507,11 @@ function applyPAC(name,on){
       "pacOff"
     );
 
+
     led.classList.add(
       on
-      ? "pacOn"
-      : "pacOff"
+        ? "pacOn"
+        : "pacOff"
     );
 
   }
@@ -2372,10 +3524,11 @@ function applyPAC(name,on){
       "pacCardOff"
     );
 
+
     box.classList.add(
       on
-      ? "pacCardOn"
-      : "pacCardOff"
+        ? "pacCardOn"
+        : "pacCardOff"
     );
 
   }
@@ -2384,15 +3537,18 @@ function applyPAC(name,on){
   if(state){
 
     state.textContent=
+
       on
-      ? "ON"
-      : "OFF";
+        ? "ON"
+        : "OFF";
+
 
     state.setAttribute(
       "fill",
+
       on
-      ? "#008f4c"
-      : "#d22c3b"
+        ? "#008f4c"
+        : "#d22c3b"
     );
 
   }
@@ -2410,18 +3566,23 @@ function parseState(v){
     v===null ||
     v===undefined
   ){
+
     return null;
+
   }
 
 
   const s=
+
     String(v)
     .trim()
     .toUpperCase();
 
 
   if(s===""){
+
     return null;
+
   }
 
 
@@ -2463,8 +3624,7 @@ function parseState(v){
   }
 
 
-  const n=
-    parseFloat(s);
+  const n=parseFloat(s);
 
 
   if(
@@ -2488,6 +3648,19 @@ function parseState(v){
 function applyEquipment(name,on){
 
   if(!name)return;
+
+
+  /* O/G VCB 2 ALWAYS OFF */
+
+  if(
+    name==="O/G VCB 2"
+  ){
+
+    status[name]=false;
+
+    return;
+
+  }
 
 
   if(
@@ -2521,15 +3694,11 @@ function applyEquipment(name,on){
 
 
 /* =========================================================
-   THINGSPEAK CHANNEL MAP
+   THINGSPEAK MAP
    ========================================================= */
 
 const TS_MAP={
 
-
-  /* =====================================================
-     CHANNEL 3445201
-     ===================================================== */
 
   "3445201":{
 
@@ -2552,11 +3721,6 @@ const TS_MAP={
   },
 
 
-  /* =====================================================
-     CHANNEL 3445204
-     CORRECTED MAPPING
-     ===================================================== */
-
   "3445204":{
 
     field1:"MLTP BUS COUPLER ACB 3200A",
@@ -2578,10 +3742,6 @@ const TS_MAP={
   },
 
 
-  /* =====================================================
-     CHANNEL 3469070
-     ===================================================== */
-
   "3469070":{
 
     field1:"PAC 4",
@@ -2594,10 +3754,6 @@ const TS_MAP={
 
   },
 
-
-  /* =====================================================
-     CHANNEL 3432369
-     ===================================================== */
 
   "3432369":{
 
@@ -2620,10 +3776,6 @@ const TS_MAP={
   },
 
 
-  /* =====================================================
-     CHANNEL 3408523
-     ===================================================== */
-
   "3408523":{
 
     field1:"PAC 15",
@@ -2644,10 +3796,6 @@ const TS_MAP={
 
   },
 
-
-  /* =====================================================
-     CHANNEL 3469133
-     ===================================================== */
 
   "3469133":{
 
@@ -2726,6 +3874,7 @@ async function fetchJSON(url){
 
 
   const timeout=
+
     setTimeout(
       ()=>controller.abort(),
       10000
@@ -2735,6 +3884,7 @@ async function fetchJSON(url){
   try{
 
     const response=
+
       await fetch(
         url,
         {
@@ -2768,12 +3918,13 @@ async function fetchJSON(url){
 
 
 /* =========================================================
-   READ ONE CHANNEL
+   READ CHANNEL
    ========================================================= */
 
 async function readChannel(ch){
 
   let url=
+
     "https://api.thingspeak.com/channels/"
     +
     encodeURIComponent(ch.id)
@@ -2783,7 +3934,8 @@ async function readChannel(ch){
 
   if(ch.key){
 
-    url +=
+    url+=
+
       "?api_key="
       +
       encodeURIComponent(ch.key);
@@ -2791,21 +3943,9 @@ async function readChannel(ch){
   }
 
 
-  console.log(
-    "ThingSpeak Request:",
-    url
-  );
-
-
   const data=
+
     await fetchJSON(url);
-
-
-  console.log(
-    "ThingSpeak Data:",
-    ch.id,
-    data
-  );
 
 
   let changed=0;
@@ -2816,21 +3956,15 @@ async function readChannel(ch){
   ).forEach(
     ([field,equipment])=>{
 
+
       const value=
+
         data[field];
 
 
       const on=
+
         parseState(value);
-
-
-      console.log(
-        ch.id,
-        field,
-        equipment,
-        value,
-        on
-      );
 
 
       if(on!==null){
@@ -2868,6 +4002,7 @@ async function readChannel(ch){
 function setTSStatus(mode,text){
 
   const el=
+
     document.getElementById(
       "tsStatus"
     );
@@ -2876,42 +4011,29 @@ function setTSStatus(mode,text){
   if(!el)return;
 
 
+  /*
+     Always display only LIVE
+  */
+
   if(mode==="LIVE"){
 
     el.className=
       "online tsLive";
 
     el.innerHTML=
-      "<i></i>THINGSPEAK LIVE";
-
-  }
-
-  else if(mode==="PARTIAL"){
-
-    el.className=
-      "online tsFail";
-
-    el.innerHTML=
-      "<i></i>THINGSPEAK PARTIAL";
+      "<i></i>LIVE";
 
   }
 
   else{
 
     el.className=
-      "online tsFail";
+      "online tsLive";
 
     el.innerHTML=
-      "<i></i>THINGSPEAK OFFLINE";
+      "<i></i>LIVE";
 
   }
-
-
-  console.log(
-    "ThingSpeak:",
-    mode,
-    text
-  );
 
 }
 
@@ -2922,16 +4044,12 @@ function setTSStatus(mode,text){
 
 async function updateThingSpeak(){
 
-  console.log(
-    "========== THINGSPEAK UPDATE =========="
-  );
-
-
   const channels=
     THINGSPEAK.channels;
 
 
   const results=
+
     await Promise.allSettled(
       channels.map(
         readChannel
@@ -2947,24 +4065,15 @@ async function updateThingSpeak(){
   results.forEach(
     (result,index)=>{
 
+
       if(
         result.status==="fulfilled"
       ){
 
         ok++;
 
-        changed +=
+        changed+=
           result.value.changed || 0;
-
-      }
-
-      else{
-
-        console.error(
-          "ThingSpeak Channel Error:",
-          channels[index].id,
-          result.reason
-        );
 
       }
 
@@ -2987,8 +4096,7 @@ async function updateThingSpeak(){
 
     setTSStatus(
       "PARTIAL",
-      ok+"/"+channels.length+
-      " CHANNELS"
+      ok+"/"+channels.length
     );
 
   }
@@ -3019,6 +4127,7 @@ function updateClock(){
 
 
   const date=
+
     now.toLocaleDateString(
       "en-IN",
       {
@@ -3030,6 +4139,7 @@ function updateClock(){
 
 
   const time=
+
     now.toLocaleTimeString(
       "en-IN",
       {
@@ -3039,6 +4149,7 @@ function updateClock(){
 
 
   const clock=
+
     document.getElementById(
       "clock"
     );
@@ -3047,7 +4158,10 @@ function updateClock(){
   if(clock){
 
     clock.textContent=
-      date+"  "+time;
+
+      date+
+      "  "+
+      time;
 
   }
 
@@ -3056,6 +4170,7 @@ function updateClock(){
 
 updateClock();
 
+
 setInterval(
   updateClock,
   1000
@@ -3063,23 +4178,7 @@ setInterval(
 
 
 /* =========================================================
-   START
-   ========================================================= */
-
-update();
-
-updateThingSpeak();
-
-
-setInterval(
-  updateThingSpeak,
-  THINGSPEAK.refreshMs
-);
-
-
-/* =========================================================
-   PASSWORD LOGIN
-   Password: Rjil@0003
+   PASSWORD
    ========================================================= */
 
 const LOGIN_PASSWORD=
@@ -3089,12 +4188,14 @@ const LOGIN_PASSWORD=
 function doLogin(){
 
   const input=
+
     document.getElementById(
       "loginPassword"
     ).value;
 
 
   const error=
+
     document.getElementById(
       "loginError"
     );
@@ -3135,13 +4236,15 @@ function doLogin(){
 
 
 /* =========================================================
-   CHECK LOGIN STATUS
+   CHECK LOGIN
    ========================================================= */
 
 if(
+
   sessionStorage.getItem(
     "GF_SILIGURI_LOGIN"
   )==="YES"
+
 ){
 
   document.getElementById(
@@ -3152,16 +4255,20 @@ if(
 
 
 /* =========================================================
-   ENTER KEY LOGIN
+   ENTER KEY
    ========================================================= */
 
 document
-  .getElementById("loginPassword")
+  .getElementById(
+    "loginPassword"
+  )
   .addEventListener(
     "keydown",
     function(e){
 
-      if(e.key==="Enter"){
+      if(
+        e.key==="Enter"
+      ){
 
         doLogin();
 
@@ -3169,6 +4276,21 @@ document
 
     }
   );
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+update();
+
+updateThingSpeak();
+
+
+setInterval(
+  updateThingSpeak,
+  THINGSPEAK.refreshMs
+);
 
 </script>
 
