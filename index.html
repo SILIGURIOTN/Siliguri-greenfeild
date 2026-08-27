@@ -9,10 +9,6 @@
 
 <style>
 
-/* =========================================================
-   GLOBAL
-   ========================================================= */
-
 :root{
   --bg:#071018;
   --panel:#0b1b29;
@@ -52,118 +48,66 @@ body{
    ========================================================= */
 
 .header{
-
   min-height:66px;
-
   background:var(--panel);
-
   border-bottom:1px solid #2b475a;
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   padding:8px 20px;
-
   position:sticky;
-
   top:0;
-
   z-index:20;
-
 }
-
 
 .header h1{
-
   margin:0;
-
   font-size:23px;
-
   letter-spacing:.5px;
-
 }
-
 
 .right{
-
   display:flex;
-
   gap:25px;
-
   align-items:center;
-
   font-size:14px;
-
 }
-
 
 .online{
-
   font-weight:bold;
-
 }
-
 
 .online i{
-
   display:inline-block;
-
   width:9px;
-
   height:9px;
-
   border-radius:50%;
-
   margin-right:6px;
-
   box-shadow:0 0 12px currentColor;
-
 }
-
 
 .tsLive{
-
   color:var(--green);
-
 }
-
 
 .tsLive i{
-
   background:var(--green);
-
 }
-
 
 .tsFail{
-
   color:#ffb300;
-
 }
-
 
 .tsFail i{
-
   background:#ffb300;
-
 }
 
-
 .clock{
-
   font-family:monospace;
-
   color:#8edfff;
-
   font-size:17px;
-
   font-weight:bold;
-
   white-space:nowrap;
-
 }
 
 
@@ -172,44 +116,26 @@ body{
    ========================================================= */
 
 .canvas{
-
   width:100%;
-
   overflow:hidden;
-
   background:#fff;
-
 }
-
 
 .sld{
-
   width:100%;
-
   max-width:1900px;
-
   margin:0 auto;
-
   background:#fff;
-
 }
-
 
 svg{
-
   width:100%;
-
   height:auto;
-
   display:block;
-
 }
 
-
 text{
-
   font-family:Arial,Helvetica,sans-serif;
-
 }
 
 
@@ -218,53 +144,31 @@ text{
    ========================================================= */
 
 .title{
-
   font-size:29px;
-
   font-weight:bold;
-
   fill:#111;
-
 }
-
 
 .sec{
-
   font-size:15px;
-
   font-weight:bold;
-
   fill:#284354;
-
 }
-
 
 .lbl{
-
   font-size:12px;
-
   font-weight:bold;
-
   fill:var(--ink);
-
 }
-
 
 .sm{
-
   font-size:10px;
-
   fill:#3d5665;
-
 }
 
-
 .note{
-
   font-size:10px;
-
   fill:#617785;
-
 }
 
 
@@ -273,45 +177,26 @@ text{
    ========================================================= */
 
 .wire{
-
   stroke:#7b8790;
-
   stroke-width:5;
-
   fill:none;
-
   stroke-linecap:round;
-
   stroke-linejoin:round;
-
 }
-
 
 .hv{
-
   stroke:#7b8790;
-
   stroke-width:7;
-
   fill:none;
-
   stroke-linecap:round;
-
   stroke-linejoin:round;
-
 }
 
-
 .bus{
-
   stroke:#7b8790;
-
   stroke-width:10;
-
   fill:none;
-
   stroke-linecap:round;
-
 }
 
 
@@ -320,77 +205,46 @@ text{
    ========================================================= */
 
 .flow{
-
   stroke:#00e676;
-
   stroke-width:5;
-
   fill:none;
-
   stroke-linecap:round;
-
   stroke-dasharray:12 17;
-
   animation:flow .62s linear infinite;
-
   filter:drop-shadow(0 0 5px #00e676);
-
 }
 
 
 /* =========================================================
    LIGHT RED FLOW
-   TRANSFORMER PORJONTO
    ========================================================= */
 
 .flowRed{
-
   stroke:#ff8a8a;
-
   stroke-width:5;
-
   fill:none;
-
   stroke-linecap:round;
-
   stroke-dasharray:10 15;
-
   animation:flowred .55s linear infinite;
-
   filter:drop-shadow(0 0 5px #ff8a8a);
-
 }
-
 
 .flow.off,
 .flowRed.off{
-
   opacity:.06;
-
   animation-play-state:paused;
-
 }
-
 
 @keyframes flow{
-
   to{
-
     stroke-dashoffset:-29;
-
   }
-
 }
 
-
 @keyframes flowred{
-
   to{
-
     stroke-dashoffset:-25;
-
   }
-
 }
 
 
@@ -399,42 +253,25 @@ text{
    ========================================================= */
 
 .box{
-
   fill:#fff;
-
   stroke:#263e4c;
-
   stroke-width:2;
-
 }
-
 
 .breakerOn{
-
   fill:#e8f9ff;
-
   stroke:#25485d;
-
   stroke-width:2;
-
 }
-
 
 .breakerOff{
-
   fill:#ffe2e6;
-
   stroke:#8b303b;
-
   stroke-width:2;
-
 }
 
-
 .equip{
-
   cursor:default;
-
 }
 
 
@@ -443,55 +280,35 @@ text{
    ========================================================= */
 
 .led{
-
   stroke:#fff;
-
   stroke-width:2;
-
 }
-
 
 .on{
-
   fill:var(--green);
-
   filter:drop-shadow(0 0 5px var(--green));
-
 }
 
-
 .off{
-
   fill:var(--red);
-
   filter:drop-shadow(0 0 5px var(--red));
-
 }
 
 
 /* =========================================================
-   TRANSFORMER INDICATION
+   TRANSFORMER
    ========================================================= */
 
 .transformerOn{
-
   stroke:#00e676 !important;
-
   stroke-width:4 !important;
-
   filter:drop-shadow(0 0 8px #00e676);
-
 }
 
-
 .transformerOff{
-
   stroke:#7b8790 !important;
-
   stroke-width:2 !important;
-
   filter:none;
-
 }
 
 
@@ -500,80 +317,46 @@ text{
    ========================================================= */
 
 .pacCard{
-
   fill:#fff;
-
   stroke:#263e4c;
-
   stroke-width:2;
-
   vector-effect:non-scaling-stroke;
-
 }
-
 
 .pacCardOn{
-
   stroke:#00a85a;
-
   stroke-width:2.5;
-
 }
-
 
 .pacCardOff{
-
   stroke:#d22c3b;
-
   stroke-width:2.5;
-
 }
-
 
 .pacText{
-
   font-size:13px;
-
   font-weight:bold;
-
   fill:#203743;
-
 }
-
 
 .pacStatus{
-
   font-size:9px;
-
   font-weight:bold;
-
 }
-
 
 .pacLed{
-
   stroke:#fff;
-
   stroke-width:1.5;
-
 }
-
 
 .pacOn{
-
   fill:var(--green);
-
   filter:drop-shadow(0 0 5px var(--green));
-
 }
 
-
 .pacOff{
-
   fill:var(--red);
-
   filter:drop-shadow(0 0 5px var(--red));
-
 }
 
 
@@ -584,132 +367,77 @@ text{
 @media(max-width:768px){
 
   .header{
-
     min-height:60px;
-
     padding:6px 10px;
-
   }
-
 
   .header h1{
-
     font-size:15px;
-
   }
-
 
   .right{
-
     gap:10px;
-
     font-size:10px;
-
   }
-
 
   .clock{
-
     font-size:13px;
-
   }
-
 
   .canvas{
-
     overflow:hidden;
-
   }
-
 
   .sld{
-
     width:100%;
-
     max-width:none;
-
   }
-
 
   svg{
-
     width:100%;
-
     height:auto;
-
   }
-
 
   .title{
-
     font-size:29px;
-
   }
-
 
   .sec{
-
     font-size:15px;
-
   }
-
 
   .lbl{
-
     font-size:12px;
-
   }
-
 
   .sm{
-
     font-size:10px;
-
   }
-
 
   .pacText{
-
     font-size:13px;
-
   }
-
 
   .pacStatus{
-
     font-size:9px;
-
   }
-
 }
-
 
 @media(max-width:480px){
 
   .header h1{
-
     font-size:12px;
-
   }
-
 
   .right{
-
     flex-direction:column;
-
     align-items:flex-end;
-
     gap:2px;
-
   }
-
 
   .clock{
-
     font-size:11px;
-
   }
-
 }
 
 
@@ -718,127 +446,69 @@ text{
    ========================================================= */
 
 #loginPage{
-
   position:fixed;
-
   inset:0;
-
   z-index:99999;
-
   background:#071018;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   font-family:Arial,Helvetica,sans-serif;
-
 }
-
 
 .loginBox{
-
   width:360px;
-
   max-width:90%;
-
   background:#0b1b29;
-
   border:1px solid #2b475a;
-
   border-radius:12px;
-
   padding:30px;
-
   box-shadow:0 0 30px rgba(0,234,255,.15);
-
   text-align:center;
-
 }
-
 
 .loginTitle{
-
   font-size:24px;
-
   font-weight:bold;
-
   color:#fff;
-
   margin-bottom:8px;
-
 }
-
 
 .loginCode{
-
   font-size:13px;
-
   color:#8edfff;
-
   margin-bottom:25px;
-
 }
-
 
 #loginPassword{
-
   width:100%;
-
   padding:13px;
-
   border-radius:6px;
-
   border:1px solid #506a7a;
-
   background:#071018;
-
   color:#fff;
-
   font-size:15px;
-
   outline:none;
-
 }
-
 
 .loginButton{
-
   width:100%;
-
   margin-top:15px;
-
   padding:13px;
-
   border:0;
-
   border-radius:6px;
-
   background:#08aee7;
-
   color:#fff;
-
   font-size:15px;
-
   font-weight:bold;
-
   cursor:pointer;
-
 }
 
-
 #loginError{
-
   margin-top:12px;
-
   color:#ff2638;
-
   font-size:12px;
-
   min-height:16px;
-
 }
 
 </style>
@@ -896,7 +566,6 @@ text{
     SLD - GREEN FIELD SILIGURI
   </h1>
 
-
   <div class="right">
 
     <div
@@ -906,7 +575,6 @@ text{
       <i></i>LIVE
 
     </div>
-
 
     <div
       id="clock"
@@ -925,7 +593,6 @@ text{
 <div class="canvas">
 
 <div class="sld">
-
 
 <svg
 viewBox="0 0 1900 1080"
@@ -946,7 +613,6 @@ SINGLE LINE DIAGRAM — GREEN FIELD SILIGURI
 
 </text>
 
-
 <text
 x="850"
 y="65"
@@ -956,11 +622,6 @@ class="sec">
 I-WB-SLGR-AG2-0003
 
 </text>
-
-
-<!-- =====================================================
-     INCOMING
-     ===================================================== -->
 
 <text
 x="850"
@@ -973,16 +634,18 @@ class="sec">
 </text>
 
 
+<!-- =====================================================
+     INCOMING
+     ===================================================== -->
+
 <path
 class="hv"
 d="M70 145 H330"/>
-
 
 <path
 id="flowIncoming"
 class="flowRed"
 d="M70 145 H330"/>
-
 
 <g class="equip">
 
@@ -994,7 +657,6 @@ width="150"
 height="54"
 rx="4"/>
 
-
 <text
 x="100"
 y="140"
@@ -1004,7 +666,6 @@ class="lbl">
 HOUSING BOARD
 
 </text>
-
 
 <text
 x="100"
@@ -1018,7 +679,6 @@ class="sm">
 
 </g>
 
-
 <text
 x="220"
 y="135"
@@ -1027,7 +687,6 @@ class="sm">
 2 POLE STRUCTURE
 
 </text>
-
 
 <g class="equip">
 
@@ -1039,7 +698,6 @@ width="155"
 height="54"
 rx="4"/>
 
-
 <text
 x="407"
 y="140"
@@ -1049,7 +707,6 @@ class="lbl">
 WBSEDCL HT METER
 
 </text>
-
 
 <text
 x="407"
@@ -1063,11 +720,9 @@ ROOM
 
 </g>
 
-
 <path
 class="hv"
 d="M485 145 H570"/>
-
 
 <g class="equip">
 
@@ -1079,7 +734,6 @@ width="135"
 height="54"
 rx="4"/>
 
-
 <text
 x="637"
 y="140"
@@ -1089,7 +743,6 @@ class="lbl">
 IC-OG PANEL
 
 </text>
-
 
 <text
 x="637"
@@ -1101,7 +754,6 @@ HT PANEL
 
 </text>
 
-
 <circle
 id="led_icog"
 class="led on"
@@ -1111,17 +763,14 @@ r="8"/>
 
 </g>
 
-
 <path
 class="hv"
 d="M705 145 H850 V235"/>
-
 
 <path
 id="flowIC"
 class="flowRed"
 d="M705 145 H850 V235"/>
-
 
 <g class="equip">
 
@@ -1133,7 +782,6 @@ width="110"
 height="52"
 rx="5"/>
 
-
 <text
 x="850"
 y="214"
@@ -1144,7 +792,6 @@ I/C VCB
 
 </text>
 
-
 <text
 x="850"
 y="231"
@@ -1154,7 +801,6 @@ class="sm">
 INCOMER
 
 </text>
-
 
 <circle
 id="led_ic"
@@ -1172,28 +818,23 @@ r="7"/>
 class="hv"
 d="M850 235 V285 H520 V330"/>
 
-
 <path
 class="hv"
 d="M850 235 V330"/>
 
-
 <path
 class="hv"
 d="M850 235 V285 H1180 V330"/>
-
 
 <path
 id="flowOG1"
 class="flowRed"
 d="M850 235 V285 H520 V330"/>
 
-
 <path
 id="flowOG2"
 class="flowRed"
 d="M850 235 V330"/>
-
 
 <path
 id="flowOG3"
@@ -1213,7 +854,6 @@ width="130"
 height="52"
 rx="5"/>
 
-
 <text
 x="520"
 y="351"
@@ -1224,7 +864,6 @@ O/G VCB 1
 
 </text>
 
-
 <text
 x="520"
 y="368"
@@ -1234,7 +873,6 @@ class="sm">
 FEEDER 1
 
 </text>
-
 
 <circle
 id="led_og1"
@@ -1258,7 +896,6 @@ width="130"
 height="52"
 rx="5"/>
 
-
 <text
 x="850"
 y="351"
@@ -1269,7 +906,6 @@ O/G VCB 2
 
 </text>
 
-
 <text
 x="850"
 y="368"
@@ -1279,7 +915,6 @@ class="sm">
 FEEDER 2
 
 </text>
-
 
 <circle
 id="led_og2"
@@ -1303,7 +938,6 @@ width="130"
 height="52"
 rx="5"/>
 
-
 <text
 x="1180"
 y="351"
@@ -1314,7 +948,6 @@ O/G VCB 3
 
 </text>
 
-
 <text
 x="1180"
 y="368"
@@ -1324,7 +957,6 @@ class="sm">
 FEEDER 3
 
 </text>
-
 
 <circle
 id="led_og3"
@@ -1344,12 +976,10 @@ r="7"/>
 class="wire"
 d="M520 382 V475"/>
 
-
 <path
 id="flowTX"
 class="flowRed"
 d="M520 382 V475"/>
-
 
 <g>
 
@@ -1362,13 +992,11 @@ fill="#fff"
 stroke="#263e4c"
 stroke-width="2"/>
 
-
 <path
 d="M492 493 Q520 510 492 527 M548 493 Q520 510 548 527"
 fill="none"
 stroke="#263e4c"
 stroke-width="3"/>
-
 
 <text
 x="570"
@@ -1379,7 +1007,6 @@ class="lbl">
 
 </text>
 
-
 <text
 x="570"
 y="522"
@@ -1389,11 +1016,9 @@ TRANSFORMER
 
 </text>
 
-
 <path
 class="wire"
 d="M520 544 V680"/>
-
 
 <path
 id="flowTX2"
@@ -1432,7 +1057,6 @@ DG 1
 
 </text>
 
-
 <text
 x="275"
 y="487"
@@ -1443,7 +1067,6 @@ class="sm">
 
 </text>
 
-
 <circle
 cx="275"
 cy="520"
@@ -1451,7 +1074,6 @@ r="29"
 fill="#fff"
 stroke="#263e4c"
 stroke-width="2"/>
-
 
 <path
 d="M255 525 Q275 505 295 525"
@@ -1461,11 +1083,12 @@ stroke-width="3"/>
 
 </g>
 
-
 <path
 class="wire"
 d="M275 549 V575"/>
 
+
+<!-- DG1 ISOLATOR -->
 
 <g>
 
@@ -1477,7 +1100,6 @@ width="100"
 height="42"
 rx="4"/>
 
-
 <text
 x="275"
 y="594"
@@ -1487,7 +1109,6 @@ class="lbl">
 ISOLATOR
 
 </text>
-
 
 <text
 x="275"
@@ -1499,7 +1120,6 @@ DG1
 
 </text>
 
-
 <circle
 id="led_iso1"
 class="led on"
@@ -1510,15 +1130,26 @@ r="7"/>
 </g>
 
 
+<!-- DG1 ISOLATOR TO ACB GRAY BASE LINE -->
+
 <path
 class="wire"
-d="M275 617 V685"/>
+d="M275 617 V685 H365"/>
 
+
+<!-- DG1 GREEN FLOW -->
+
+<path
+id="flowDG1"
+class="flow off"
+d="M275 617 V685 H365"/>
+
+
+<!-- DG1 N-CONTACTOR -->
 
 <path
 class="wire"
 d="M275 640 H335 V601"/>
-
 
 <g>
 
@@ -1530,7 +1161,6 @@ width="125"
 height="44"
 rx="4"/>
 
-
 <text
 x="397"
 y="594"
@@ -1540,7 +1170,6 @@ class="lbl">
 N-CONTACTOR
 
 </text>
-
 
 <text
 id="txt_nc1"
@@ -1553,7 +1182,6 @@ class="sm">
 
 </text>
 
-
 <circle
 id="led_nc1"
 class="led on"
@@ -1564,11 +1192,7 @@ r="7"/>
 </g>
 
 
-<path
-id="flowDG1"
-class="flow"
-d="M275 617 V685 H365"/>
-
+<!-- DG1 ACB -->
 
 <g>
 
@@ -1581,7 +1205,6 @@ width="120"
 height="55"
 rx="4"/>
 
-
 <text
 x="425"
 y="678"
@@ -1591,7 +1214,6 @@ class="lbl">
 DG1 ACB
 
 </text>
-
 
 <text
 x="425"
@@ -1603,7 +1225,6 @@ class="sm">
 
 </text>
 
-
 <circle
 id="led_dg1"
 class="led on"
@@ -1612,7 +1233,6 @@ cy="668"
 r="7"/>
 
 </g>
-
 
 <path
 class="wire"
@@ -1633,7 +1253,6 @@ DG 2
 
 </text>
 
-
 <text
 x="1425"
 y="487"
@@ -1644,7 +1263,6 @@ class="sm">
 
 </text>
 
-
 <circle
 cx="1425"
 cy="520"
@@ -1652,7 +1270,6 @@ r="29"
 fill="#fff"
 stroke="#263e4c"
 stroke-width="2"/>
-
 
 <path
 d="M1405 525 Q1425 505 1445 525"
@@ -1662,11 +1279,12 @@ stroke-width="3"/>
 
 </g>
 
-
 <path
 class="wire"
 d="M1425 549 V575"/>
 
+
+<!-- DG2 ISOLATOR -->
 
 <g>
 
@@ -1678,7 +1296,6 @@ width="100"
 height="42"
 rx="4"/>
 
-
 <text
 x="1425"
 y="594"
@@ -1688,7 +1305,6 @@ class="lbl">
 ISOLATOR
 
 </text>
-
 
 <text
 x="1425"
@@ -1700,7 +1316,6 @@ DG2
 
 </text>
 
-
 <circle
 id="led_iso2"
 class="led on"
@@ -1711,15 +1326,26 @@ r="7"/>
 </g>
 
 
+<!-- DG2 ISOLATOR TO ACB GRAY BASE LINE -->
+
 <path
 class="wire"
-d="M1425 617 V685"/>
+d="M1425 617 V685 H1335"/>
 
+
+<!-- DG2 GREEN FLOW -->
+
+<path
+id="flowDG2"
+class="flow off"
+d="M1425 617 V685 H1335"/>
+
+
+<!-- DG2 N-CONTACTOR -->
 
 <path
 class="wire"
 d="M1425 640 H1365 V601"/>
-
 
 <g>
 
@@ -1731,7 +1357,6 @@ width="125"
 height="44"
 rx="4"/>
 
-
 <text
 x="1297"
 y="594"
@@ -1741,7 +1366,6 @@ class="lbl">
 N-CONTACTOR
 
 </text>
-
 
 <text
 id="txt_nc2"
@@ -1754,7 +1378,6 @@ class="sm">
 
 </text>
 
-
 <circle
 id="led_nc2"
 class="led on"
@@ -1765,11 +1388,7 @@ r="7"/>
 </g>
 
 
-<path
-id="flowDG2"
-class="flow"
-d="M1425 617 V685 H1335"/>
-
+<!-- DG2 ACB -->
 
 <g>
 
@@ -1782,7 +1401,6 @@ width="120"
 height="55"
 rx="4"/>
 
-
 <text
 x="1275"
 y="678"
@@ -1792,7 +1410,6 @@ class="lbl">
 DG2 ACB
 
 </text>
-
 
 <text
 x="1275"
@@ -1804,7 +1421,6 @@ class="sm">
 
 </text>
 
-
 <circle
 id="led_dg2"
 class="led on"
@@ -1813,7 +1429,6 @@ cy="668"
 r="7"/>
 
 </g>
-
 
 <path
 class="wire"
@@ -1834,44 +1449,36 @@ MLTP PANEL — MAIN BUSBAR 3200A
 
 </text>
 
-
 <path
 class="bus"
 d="M150 770 H1550"/>
-
 
 <path
 id="flowMain"
 class="flow"
 d="M150 770 H1550"/>
 
-
 <path
 class="wire"
 d="M520 680 V770"/>
-
 
 <path
 id="flowTXBus"
 class="flow"
 d="M520 680 V770"/>
 
-
 <path
 class="wire"
 d="M425 710 V770"/>
-
 
 <path
 id="flowDG1Bus"
 class="flow"
 d="M425 710 V770"/>
 
-
 <path
 class="wire"
 d="M1275 710 V770"/>
-
 
 <path
 id="flowDG2Bus"
@@ -1889,7 +1496,6 @@ width="130"
 height="50"
 rx="4"/>
 
-
 <text
 x="850"
 y="766"
@@ -1900,7 +1506,6 @@ BUS COUPLER
 
 </text>
 
-
 <text
 x="850"
 y="783"
@@ -1910,7 +1515,6 @@ class="sm">
 3200A
 
 </text>
-
 
 <circle
 id="led_mbc"
@@ -1930,12 +1534,10 @@ r="7"/>
 class="wire"
 d="M275 770 V835"/>
 
-
 <path
 id="flowUPS2501"
 class="flow"
 d="M275 770 V835"/>
-
 
 <g>
 
@@ -1947,7 +1549,6 @@ width="170"
 height="55"
 rx="5"/>
 
-
 <text
 x="275"
 y="857"
@@ -1957,7 +1558,6 @@ class="lbl">
 250 KVA UPS 1
 
 </text>
-
 
 <text
 x="275"
@@ -1969,7 +1569,6 @@ MLTP LEFT FEED
 
 </text>
 
-
 <circle
 id="led_ups2501"
 class="led on"
@@ -1979,17 +1578,14 @@ r="7"/>
 
 </g>
 
-
 <path
 class="wire"
 d="M1425 770 V835"/>
-
 
 <path
 id="flowUPS2502"
 class="flow"
 d="M1425 770 V835"/>
-
 
 <g>
 
@@ -2001,7 +1597,6 @@ width="170"
 height="55"
 rx="5"/>
 
-
 <text
 x="1425"
 y="857"
@@ -2012,7 +1607,6 @@ class="lbl">
 
 </text>
 
-
 <text
 x="1425"
 y="875"
@@ -2022,7 +1616,6 @@ class="sm">
 MLTP RIGHT FEED
 
 </text>
-
 
 <circle
 id="led_ups2502"
@@ -2042,23 +1635,19 @@ r="7"/>
 class="wire"
 d="M620 770 V850"/>
 
-
 <path
 class="wire"
 d="M1080 770 V850"/>
-
 
 <path
 id="flowOut1"
 class="flow"
 d="M620 770 V850"/>
 
-
 <path
 id="flowOut2"
 class="flow"
 d="M1080 770 V850"/>
-
 
 <g>
 
@@ -2070,7 +1659,6 @@ width="90"
 height="48"
 rx="4"/>
 
-
 <text
 x="620"
 y="870"
@@ -2080,7 +1668,6 @@ class="sm">
 OUTGOING 1
 
 </text>
-
 
 <text
 x="620"
@@ -2092,7 +1679,6 @@ class="sm">
 
 </text>
 
-
 <circle
 id="led_out1"
 class="led on"
@@ -2101,7 +1687,6 @@ cy="863"
 r="6"/>
 
 </g>
-
 
 <g>
 
@@ -2113,7 +1698,6 @@ width="90"
 height="48"
 rx="4"/>
 
-
 <text
 x="1080"
 y="870"
@@ -2124,7 +1708,6 @@ OUTGOING 2
 
 </text>
 
-
 <text
 x="1080"
 y="885"
@@ -2134,7 +1717,6 @@ class="sm">
 2000A
 
 </text>
-
 
 <circle
 id="led_out2"
@@ -2160,33 +1742,27 @@ MPDB PANEL — 2500A BUS
 
 </text>
 
-
 <path
 class="bus"
 d="M150 955 H1550"/>
-
 
 <path
 id="flowMPDB"
 class="flow"
 d="M150 955 H1550"/>
 
-
 <path
 class="wire"
 d="M620 898 V955"/>
-
 
 <path
 class="wire"
 d="M1080 898 V955"/>
 
-
 <path
 id="flowMPDB1"
 class="flow"
 d="M620 898 V955"/>
-
 
 <path
 id="flowMPDB2"
@@ -2204,7 +1780,6 @@ width="130"
 height="48"
 rx="4"/>
 
-
 <text
 x="620"
 y="950"
@@ -2215,7 +1790,6 @@ MPDB INCOMER 1
 
 </text>
 
-
 <text
 x="620"
 y="965"
@@ -2225,7 +1799,6 @@ class="sm">
 2500A
 
 </text>
-
 
 <circle
 id="led_mi1"
@@ -2247,7 +1820,6 @@ width="130"
 height="48"
 rx="4"/>
 
-
 <text
 x="1080"
 y="950"
@@ -2258,7 +1830,6 @@ MPDB INCOMER 2
 
 </text>
 
-
 <text
 x="1080"
 y="965"
@@ -2268,7 +1839,6 @@ class="sm">
 2500A
 
 </text>
-
 
 <circle
 id="led_mi2"
@@ -2290,7 +1860,6 @@ width="130"
 height="50"
 rx="4"/>
 
-
 <text
 x="850"
 y="952"
@@ -2301,7 +1870,6 @@ BUS COUPLER
 
 </text>
 
-
 <text
 x="850"
 y="968"
@@ -2311,7 +1879,6 @@ class="sm">
 2500A
 
 </text>
-
 
 <circle
 id="led_pbc"
@@ -2329,7 +1896,6 @@ r="7"/>
 
 <g id="pacSidePanel">
 
-
 <rect
 x="8"
 y="300"
@@ -2339,7 +1905,6 @@ rx="10"
 fill="#f7fafc"
 stroke="#b9cbd5"
 stroke-width="2"/>
-
 
 <rect
 x="1687"
@@ -2351,7 +1916,6 @@ fill="#f7fafc"
 stroke="#b9cbd5"
 stroke-width="2"/>
 
-
 <text
 x="110"
 y="325"
@@ -2362,7 +1926,6 @@ PAC 1–9
 
 </text>
 
-
 <text
 x="1790"
 y="325"
@@ -2372,7 +1935,6 @@ class="sec">
 PAC 10–18
 
 </text>
-
 
 <g id="pacGroup"></g>
 
@@ -2393,66 +1955,54 @@ class="sec">
 
 </text>
 
-
 <path
 class="wire"
 d="M325 955 V1015"/>
-
 
 <path
 id="flow20U1"
 class="flow"
 d="M325 955 V1015"/>
 
-
 <path
 class="wire"
 d="M490 955 V1015"/>
-
 
 <path
 id="flowSM1"
 class="flow"
 d="M490 955 V1015"/>
 
-
 <path
 class="wire"
 d="M630 955 V1015"/>
-
 
 <path
 id="flowSM2"
 class="flow"
 d="M630 955 V1015"/>
 
-
 <path
 class="wire"
 d="M1070 955 V1015"/>
-
 
 <path
 id="flowSM3"
 class="flow"
 d="M1070 955 V1015"/>
 
-
 <path
 class="wire"
 d="M1210 955 V1015"/>
-
 
 <path
 id="flowSM4"
 class="flow"
 d="M1210 955 V1015"/>
 
-
 <path
 class="wire"
 d="M1375 955 V1015"/>
-
 
 <path
 id="flow20U2"
@@ -2470,7 +2020,6 @@ width="150"
 height="48"
 rx="5"/>
 
-
 <text
 x="325"
 y="1036"
@@ -2480,7 +2029,6 @@ class="lbl">
 20 KVA UPS 1
 
 </text>
-
 
 <text
 id="txt_20u1"
@@ -2492,7 +2040,6 @@ class="sm">
 ONLINE
 
 </text>
-
 
 <circle
 id="led_20u1"
@@ -2514,7 +2061,6 @@ width="120"
 height="48"
 rx="5"/>
 
-
 <text
 x="490"
 y="1042"
@@ -2524,7 +2070,6 @@ class="lbl">
 SMPS-1
 
 </text>
-
 
 <circle
 id="led_sm1"
@@ -2546,7 +2091,6 @@ width="120"
 height="48"
 rx="5"/>
 
-
 <text
 x="630"
 y="1042"
@@ -2556,7 +2100,6 @@ class="lbl">
 SMPS-2
 
 </text>
-
 
 <circle
 id="led_sm2"
@@ -2578,7 +2121,6 @@ width="120"
 height="48"
 rx="5"/>
 
-
 <text
 x="1070"
 y="1042"
@@ -2588,7 +2130,6 @@ class="lbl">
 SMPS-3
 
 </text>
-
 
 <circle
 id="led_sm3"
@@ -2610,7 +2151,6 @@ width="120"
 height="48"
 rx="5"/>
 
-
 <text
 x="1210"
 y="1042"
@@ -2620,7 +2160,6 @@ class="lbl">
 SMPS-4
 
 </text>
-
 
 <circle
 id="led_sm4"
@@ -2642,7 +2181,6 @@ width="150"
 height="48"
 rx="5"/>
 
-
 <text
 x="1375"
 y="1036"
@@ -2652,7 +2190,6 @@ class="lbl">
 20 KVA UPS 2
 
 </text>
-
 
 <text
 id="txt_20u2"
@@ -2664,7 +2201,6 @@ class="sm">
 ONLINE
 
 </text>
-
 
 <circle
 id="led_20u2"
@@ -2686,11 +2222,9 @@ GREEN = ON • RED = OFF • LIVE STATUS FROM 6 THINGSPEAK CHANNELS • AUTO REF
 
 </text>
 
-
 </svg>
 
 </div>
-
 </div>
 
 
@@ -2704,55 +2238,38 @@ GREEN = ON • RED = OFF • LIVE STATUS FROM 6 THINGSPEAK CHANNELS • AUTO REF
 const status={
 
  "IC-OG PANEL":false,
-
  "I/C VCB":false,
-
  "O/G VCB 1":false,
-
  "O/G VCB 2":false,
-
  "O/G VCB 3":false,
-
  "2000 KVA TRANSFORMER":false,
 
- "DG1 ISOLATOR":false,
-
- "DG2 ISOLATOR":false,
+ "DG1 ISOLATOR":true,
+ "DG2 ISOLATOR":true,
 
  "DG1 NEUTRAL CONTACTOR":false,
-
  "DG2 NEUTRAL CONTACTOR":false,
 
  "DG1 ACB 1600A":false,
-
  "DG2 ACB 1600A":false,
 
  "MLTP BUS COUPLER ACB 3200A":false,
-
  "MLTP OUTGOING 1 ACB 2000A":false,
-
  "MLTP OUTGOING 2 ACB 2000A":false,
 
  "MPDB INCOMER 1 ACB 2500A":false,
-
  "MPDB INCOMER 2 ACB 2500A":false,
-
  "MPDB BUS COUPLER ACB 2500A":false,
 
  "250 KVA UPS 1":false,
-
  "250 KVA UPS 2":false,
 
  "20 KVA UPS 1":false,
-
  "20 KVA UPS 2":false,
 
  "SMPS 1":false,
-
  "SMPS 2":false,
-
  "SMPS 3":false,
-
  "SMPS 4":false
 
 };
@@ -2765,53 +2282,40 @@ const status={
 const leds={
 
  "IC-OG PANEL":"led_icog",
-
  "I/C VCB":"led_ic",
 
  "O/G VCB 1":"led_og1",
-
  "O/G VCB 2":"led_og2",
-
  "O/G VCB 3":"led_og3",
 
  "DG1 ISOLATOR":"led_iso1",
-
  "DG2 ISOLATOR":"led_iso2",
 
  "DG1 NEUTRAL CONTACTOR":"led_nc1",
-
  "DG2 NEUTRAL CONTACTOR":"led_nc2",
 
  "DG1 ACB 1600A":"led_dg1",
-
  "DG2 ACB 1600A":"led_dg2",
 
  "MLTP BUS COUPLER ACB 3200A":"led_mbc",
 
  "MLTP OUTGOING 1 ACB 2000A":"led_out1",
-
  "MLTP OUTGOING 2 ACB 2000A":"led_out2",
 
  "MPDB INCOMER 1 ACB 2500A":"led_mi1",
-
  "MPDB INCOMER 2 ACB 2500A":"led_mi2",
 
  "MPDB BUS COUPLER ACB 2500A":"led_pbc",
 
  "250 KVA UPS 1":"led_ups2501",
-
  "250 KVA UPS 2":"led_ups2502",
 
  "20 KVA UPS 1":"led_20u1",
-
  "20 KVA UPS 2":"led_20u2",
 
  "SMPS 1":"led_sm1",
-
  "SMPS 2":"led_sm2",
-
  "SMPS 3":"led_sm3",
-
  "SMPS 4":"led_sm4"
 
 };
@@ -2824,7 +2328,6 @@ const leds={
 const breakers={
 
  "DG1 ACB 1600A":"b_dg1",
-
  "DG2 ACB 1600A":"b_dg2"
 
 };
@@ -2905,6 +2408,14 @@ function flow(id,on){
    ========================================================= */
 
 function update(){
+
+
+  /* =====================================================
+     DG ISOLATORS ALWAYS ON
+     ===================================================== */
+
+  status["DG1 ISOLATOR"]=true;
+  status["DG2 ISOLATOR"]=true;
 
 
   /* LED */
@@ -3001,10 +2512,6 @@ function update(){
     status["O/G VCB 1"];
 
 
-  /*
-     O/G VCB 2 is intentionally disabled.
-  */
-
   const og2=false;
 
 
@@ -3017,12 +2524,9 @@ function update(){
 
   /* =====================================================
      TRANSFORMER
-     O/G VCB1 ON = TRANSFORMER ON
      ===================================================== */
 
-  const tx=
-
-    og1;
+  const tx=og1;
 
 
   status[
@@ -3047,7 +2551,6 @@ function update(){
       "transformerOn",
       "transformerOff"
     );
-
 
     transformer.classList.add(
       tx
@@ -3125,7 +2628,6 @@ function update(){
 
   /* =====================================================
      HT FLOW
-     LIGHT RED
      ===================================================== */
 
   flow(
@@ -3133,30 +2635,25 @@ function update(){
     incoming
   );
 
-
   flow(
     "flowIC",
     incoming
   );
-
 
   flow(
     "flowOG1",
     og1
   );
 
-
   flow(
     "flowOG2",
     false
   );
 
-
   flow(
     "flowOG3",
     og3
   );
-
 
   flow(
     "flowTX",
@@ -3173,30 +2670,32 @@ function update(){
     tx
   );
 
-
   flow(
     "flowTXBus",
     tx
   );
 
 
+  /* =====================================================
+     DG FLOW
+     ISOLATOR ALWAYS ON
+     FLOW ONLY WHEN COMPLETE DG IS ON
+     ===================================================== */
+
   flow(
     "flowDG1",
     dg1
   );
-
 
   flow(
     "flowDG1Bus",
     dg1
   );
 
-
   flow(
     "flowDG2",
     dg2
   );
-
 
   flow(
     "flowDG2Bus",
@@ -3204,17 +2703,24 @@ function update(){
   );
 
 
+  /* =====================================================
+     MAIN BUS
+     ===================================================== */
+
   flow(
     "flowMain",
     main
   );
 
 
+  /* =====================================================
+     OUTGOING
+     ===================================================== */
+
   flow(
     "flowOut1",
     out1
   );
-
 
   flow(
     "flowOut2",
@@ -3222,17 +2728,19 @@ function update(){
   );
 
 
+  /* =====================================================
+     MPDB
+     ===================================================== */
+
   flow(
     "flowMPDB",
     mpdb
   );
 
-
   flow(
     "flowMPDB1",
     out1
   );
-
 
   flow(
     "flowMPDB2",
@@ -3251,7 +2759,6 @@ function update(){
       "250 KVA UPS 1"
     ] && main
   );
-
 
   flow(
     "flowUPS2502",
@@ -3274,7 +2781,6 @@ function update(){
     ] && mpdb
   );
 
-
   flow(
     "flowSM1",
 
@@ -3282,7 +2788,6 @@ function update(){
       "SMPS 1"
     ] && mpdb
   );
-
 
   flow(
     "flowSM2",
@@ -3292,7 +2797,6 @@ function update(){
     ] && mpdb
   );
 
-
   flow(
     "flowSM3",
 
@@ -3301,7 +2805,6 @@ function update(){
     ] && mpdb
   );
 
-
   flow(
     "flowSM4",
 
@@ -3309,7 +2812,6 @@ function update(){
       "SMPS 4"
     ] && mpdb
   );
-
 
   flow(
     "flow20U2",
@@ -3334,7 +2836,6 @@ const pacGroup=
 
 
 const pacY=[
-
   350,
   400,
   450,
@@ -3344,7 +2845,6 @@ const pacY=[
   650,
   700,
   750
-
 ];
 
 
@@ -3352,55 +2852,40 @@ for(let i=1;i<=18;i++){
 
   const left=i<=9;
 
-
   const num=
-
     left
       ? i
       : i-9;
 
-
   const y=
-
     pacY[
       num-1
     ];
 
-
   const x=
-
     left
       ? 20
       : 1695;
 
-
   const w=180;
 
-
   const ledX=
-
     left
       ? 185
       : 1865;
 
-
   const textX=
-
     left
       ? 38
       : 1713;
 
-
   const anchor="start";
 
-
   const g=
-
     document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
     );
-
 
   g.innerHTML=`
 
@@ -3444,9 +2929,7 @@ for(let i=1;i<=18;i++){
 
   `;
 
-
   pacGroup.appendChild(g);
-
 
   status[
     "PAC "+i
@@ -3468,16 +2951,12 @@ function applyPAC(name,on){
       .replace(/\D/g,"")
     );
 
-
   if(
     num<1 ||
     num>18
   ){
-
     return;
-
   }
-
 
   const led=
 
@@ -3485,13 +2964,11 @@ function applyPAC(name,on){
       "pacLed"+num
     );
 
-
   const box=
 
     document.getElementById(
       "pacBox"+num
     );
-
 
   const state=
 
@@ -3499,14 +2976,12 @@ function applyPAC(name,on){
       "pacState"+num
     );
 
-
   if(led){
 
     led.classList.remove(
       "pacOn",
       "pacOff"
     );
-
 
     led.classList.add(
       on
@@ -3516,14 +2991,12 @@ function applyPAC(name,on){
 
   }
 
-
   if(box){
 
     box.classList.remove(
       "pacCardOn",
       "pacCardOff"
     );
-
 
     box.classList.add(
       on
@@ -3533,7 +3006,6 @@ function applyPAC(name,on){
 
   }
 
-
   if(state){
 
     state.textContent=
@@ -3541,7 +3013,6 @@ function applyPAC(name,on){
       on
         ? "ON"
         : "OFF";
-
 
     state.setAttribute(
       "fill",
@@ -3566,11 +3037,8 @@ function parseState(v){
     v===null ||
     v===undefined
   ){
-
     return null;
-
   }
-
 
   const s=
 
@@ -3578,13 +3046,9 @@ function parseState(v){
     .trim()
     .toUpperCase();
 
-
   if(s===""){
-
     return null;
-
   }
-
 
   if([
 
@@ -3604,7 +3068,6 @@ function parseState(v){
 
   }
 
-
   if([
 
     "0",
@@ -3623,18 +3086,13 @@ function parseState(v){
 
   }
 
-
   const n=parseFloat(s);
-
 
   if(
     Number.isFinite(n)
   ){
-
     return n!==0;
-
   }
-
 
   return null;
 
@@ -3648,6 +3106,23 @@ function parseState(v){
 function applyEquipment(name,on){
 
   if(!name)return;
+
+
+  /* =====================================================
+     DG ISOLATORS ALWAYS ON
+     THINGSPEAK CANNOT TURN THEM OFF
+     ===================================================== */
+
+  if(
+    name==="DG1 ISOLATOR" ||
+    name==="DG2 ISOLATOR"
+  ){
+
+    status[name]=true;
+
+    return;
+
+  }
 
 
   /* O/G VCB 2 ALWAYS OFF */
@@ -3699,112 +3174,72 @@ function applyEquipment(name,on){
 
 const TS_MAP={
 
-
   "3445201":{
 
     field1:"IC-OG PANEL",
-
     field2:"I/C VCB",
-
     field3:"O/G VCB 1",
-
     field4:"O/G VCB 2",
-
     field5:"O/G VCB 3",
-
     field6:"DG1 ACB 1600A",
-
     field7:"DG2 ACB 1600A",
-
     field8:"2000 KVA TRANSFORMER"
 
   },
 
-
   "3445204":{
 
     field1:"MLTP BUS COUPLER ACB 3200A",
-
     field2:"MLTP OUTGOING 1 ACB 2000A",
-
     field3:"MLTP OUTGOING 2 ACB 2000A",
-
     field4:"MPDB INCOMER 1 ACB 2500A",
-
     field5:"MPDB INCOMER 2 ACB 2500A",
-
     field6:"MPDB BUS COUPLER ACB 2500A",
-
     field7:"PAC 2",
-
     field8:"PAC 3"
 
   },
 
-
   "3469070":{
 
     field1:"PAC 4",
-
     field2:"PAC 5",
-
     field3:"PAC 7",
-
     field4:"PAC 8"
 
   },
 
-
   "3432369":{
 
     field1:"PAC 1",
-
     field2:"PAC 6",
-
     field3:"PAC 9",
-
     field4:"PAC 10",
-
     field5:"PAC 11",
-
     field6:"PAC 12",
-
     field7:"PAC 13",
-
     field8:"PAC 14"
 
   },
 
-
   "3408523":{
 
     field1:"PAC 15",
-
     field2:"PAC 16",
-
     field3:"PAC 17",
-
     field4:"PAC 18",
-
     field5:"SMPS 1",
-
     field6:"SMPS 2",
-
     field7:"SMPS 3",
-
     field8:"SMPS 4"
 
   },
 
-
   "3469133":{
 
     field1:"250 KVA UPS 1",
-
     field2:"250 KVA UPS 2",
-
     field3:"20 KVA UPS 1",
-
     field4:"20 KVA UPS 2"
 
   }
@@ -3872,14 +3307,11 @@ async function fetchJSON(url){
   const controller=
     new AbortController();
 
-
   const timeout=
-
     setTimeout(
       ()=>controller.abort(),
       10000
     );
-
 
   try{
 
@@ -3894,7 +3326,6 @@ async function fetchJSON(url){
         }
       );
 
-
     if(!response.ok){
 
       throw new Error(
@@ -3902,7 +3333,6 @@ async function fetchJSON(url){
       );
 
     }
-
 
     return await response.json();
 
@@ -3956,7 +3386,6 @@ async function readChannel(ch){
   ).forEach(
     ([field,equipment])=>{
 
-
       const value=
 
         data[field];
@@ -3985,9 +3414,7 @@ async function readChannel(ch){
   return{
 
     configured:true,
-
     changed:changed,
-
     data:data
 
   };
@@ -4007,13 +3434,8 @@ function setTSStatus(mode,text){
       "tsStatus"
     );
 
-
   if(!el)return;
 
-
-  /*
-     Always display only LIVE
-  */
 
   if(mode==="LIVE"){
 
@@ -4064,7 +3486,6 @@ async function updateThingSpeak(){
 
   results.forEach(
     (result,index)=>{
-
 
       if(
         result.status==="fulfilled"
